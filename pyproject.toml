@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resource-war"
+version = "0.0.1"
+description = "Agent9 (CS F407): strategic agents in a territory-conquest game coupling a simultaneous encounter game with sequential Battle Mode search."
+requires-python = ">=3.11"
+# Exact pins live in requirements.txt; these are the minimum compatible versions.
+dependencies = [
+    "numpy>=2.2",
+    "scipy>=1.14",
+    "nashpy>=0.0.41",
+    "matplotlib>=3.9",
+    "rich>=13",
+    "streamlit>=1.40",
+    "PyYAML>=6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "hypothesis>=6.100"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"resource_war.demo" = ["web_static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

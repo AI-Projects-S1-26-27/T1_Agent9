@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Scratch output from local runs. Committed experiment results live in
+# experiments/results/ and are NOT ignored.
+*.log
+/tmp/
+
+# Smoke-run output (python -m resource_war.reproduce --quick); never part of the report
+experiments/results_quick/

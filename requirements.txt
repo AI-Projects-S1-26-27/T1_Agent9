@@ -1,0 +1,14 @@
+# Pinned direct dependencies. Verified on 2026-11-13 to resolve on Windows,
+# Linux and macOS for Python 3.11, 3.12 and 3.13 (see docs/AI_USAGE.md).
+# numpy and scipy are deliberately held at the newest releases that still
+# support Python 3.11; numpy's Generator stream must be identical on every
+# teammate's machine for byte-identical replays.
+numpy==2.4.6
+scipy==1.17.1
+nashpy==0.0.43
+matplotlib==3.11.2
+pytest==9.2.0
+hypothesis==6.170.15
+rich==15.0.0
+streamlit==1.67.0
+PyYAML==6.0.3
