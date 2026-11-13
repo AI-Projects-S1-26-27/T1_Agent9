@@ -1,5 +1,14 @@
 # Agent9: Strategic Agents in a Territory-Conquest Game
 
+CS F407 Artificial Intelligence, BITS Pilani Hyderabad. **Topic:** Agents & Game Theory ·
+**Track:** Demo.
+
+Two players compete for resources on an 8×8 grid. The game has two layers:
+
+- **Encounters.** When their units meet on a resource cell, they play a simultaneous Attack /
+  Defend / Expand game. It is analysed exactly: dominance, pure and mixed Nash equilibria (support
+  and vertex enumeration), and Pareto optimality.
+- **Battles.** If both attack, they fight a sequential Battle Mode, solved with minimax and alpha-beta pruning.
 
 The layers are **coupled**: the Attack-vs-Attack payoff comes from the *measured* battle-win
 probability at the two agents' search depths. That lets us measure how a lookahead advantage
