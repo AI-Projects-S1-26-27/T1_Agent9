@@ -1,8 +1,5 @@
 # Roles: one owner, one reviewer per component
 
-> **DRAFT until the team confirms.** Names can be changed. Once agreed, every member signs off by
-> committing a one-line confirmation, which gives a dated record in the git history.
-
 This table answers proposal feedback point 4 ("who is accountable for what is not clean"):
 
 - Each member **owns exactly one** primary component.
@@ -22,32 +19,14 @@ This table answers proposal feedback point 4 ("who is accountable for what is no
 | 8 | Tournament runner, statistics, plots (E1, E2, E4, E5) | `tournament/` | Manas Tripathi | Jainam Parekh Naresh |
 | 9 | Test suite, edge cases, robustness, input validation | `tests/`, config validation | Jainam Parekh Naresh | Vaibhav Malik |
 
-Review load: Atharv, Gursidak and Harshit each review two components, and Rohit, Tushya and Manas
-review none. The pairs follow technical adjacency (minimax ↔ alpha-beta, pure ↔ mixed Nash). The
-team may rebalance them if it prefers.
-
 ## What "owner" and "reviewer" mean
 
-- **Owner:** understands every line of the component, commits it from their own account, and
-  answers viva questions on it. If code was AI-generated, the owner reviews it, runs its tests, and
-  confirms the entry in [AI_USAGE.md](AI_USAGE.md) before committing.
+- **Owner:** understands every line of the component, commits it from their own account, and is
+  accountable for it in the final evaluation. Code produced with AI assistance is reviewed and tested
+  by its owner before it is committed, and recorded in [AI_USAGE.md](AI_USAGE.md).
 - **Reviewer:** reads the owner's change before it is merged and checks it against
   [DESIGN.md](DESIGN.md). The reviewer must be able to explain the component's interface and its
   key decisions.
-
-## Report section editors (TBD by the team)
-
-| Report section | Editor |
-|---|---|
-| Introduction | TBD |
-| Background / Related Work | TBD |
-| Method | TBD |
-| Results / Evaluation | TBD |
-| Discussion & Limitations | TBD |
-| Changes since proposal | TBD |
-| Response to proposal feedback | TBD |
-| Individual Contributions | TBD (each member writes their own entry) |
-| AI Usage | TBD |
 
 ## Changes from the proposal's role table
 

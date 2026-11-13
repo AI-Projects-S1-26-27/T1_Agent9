@@ -1,10 +1,11 @@
 # Design: Strategic Agents in a Territory-Conquest Game
 
-**Team Agent9 · CS F407 · Topic: Agents & Game Theory · Track: Demo** (both fixed by the approved proposal)
+Team Agent9, CS F407 Artificial Intelligence. Topic: Agents and Game Theory. Track: Demo.
 
-Status: P0 draft, 2026-11-13. Section owners are listed in [ROLES.md](ROLES.md). Pre-registered
-predictions are in [PREDICTIONS.md](PREDICTIONS.md). Where this document and the approved proposal
-disagree, the proposal wins; every deliberate deviation is listed in §9.
+Version 1.0, 13 November 2026. Component owners are listed in [ROLES.md](ROLES.md), pre-registered
+predictions in [PREDICTIONS.md](PREDICTIONS.md), and the reasoning behind each decision (D01, D02, ...)
+in [DECISIONS.md](DECISIONS.md). Where this document and the approved proposal disagree, the proposal
+takes precedence; every deliberate deviation is listed in §9.
 
 Reference numbers like [6] refer to the proposal's reference list, reproduced in §10.
 
@@ -26,9 +27,8 @@ the encounter matrix is not a constant; it is computed from the *measured* Battl
 probabilities at the two agents' search depths (§5). That lets us measure how an advantage in
 sequential lookahead changes the equilibrium, and the payoffs, of the simultaneous game.
 
-Wording rule for README and report: *"We did not find a teaching/demo environment that exposes this
-coupling for live inspection."* We do **not** claim to be the first. TODO (team): verify this
-statement against the literature before the report; add only citations someone has actually read.
+We do not claim to be the first to study this coupling. The contribution is an environment in which
+it can be measured and inspected live.
 
 ---
 
@@ -66,7 +66,7 @@ Row player's payoff (the column player's payoff is the mirror image, using p_col
   the cell (V).
 - **Attack vs Attack** starts Battle Mode (§4). The expected payoffs are p_row·V − c and p_col·V − c.
   - Battles can end in an exact tie (§4.4). On a tie both attackers still pay c and nobody gets V.
-    So p_row + p_col ≤ 1, and **the column payoff is p_col·V − c, not (1 − p_row)·V − c** (decision 1).
+    So p_row + p_col ≤ 1, and **the column payoff is p_col·V − c, not (1 − p_row)·V − c** (D04).
   - With p_row = p_col = ½ the game is symmetric: the column payoff matrix is the transpose of the
     row matrix.
 
@@ -160,7 +160,7 @@ order:
 
 1. If the unit is standing on an uncollected resource cell → **Collect**.
 2. Else, if any uncollected resource cell exists → **Move** one step toward the best one: the
-   highest V / (distance + 1) (decision D29).
+   highest V / (distance + 1) (D29).
    - Distance is Manhattan.
    - A player's units claim distinct targets while free targets remain (D31).
    - Ties go to the first in player-relative row-major order.
@@ -200,7 +200,7 @@ analysis predict tournament scores. To keep it exact:
 - The same seed and the same config must produce a **byte-identical** game log. P1 adds a test for
   this.
 
-### 3.5 Encounter-frequency gate (decision 9, P1)
+### 3.5 Encounter-frequency gate (D08)
 
 Agents differ only at encounters. If encounters are rare, every agent ties and the demo cannot show
 the "measurable difference" the instructor asked for. With symmetric resources and a mirrored policy,
@@ -251,13 +251,13 @@ On its ply, the side to move picks exactly **one** unit and **one** action:
 - **Fixed move order.** Units in index order; within a unit: STRIKE(target 0), STRIKE(target 1),
   DEFEND, RETREAT, ADVANCE. Move generation always returns legal moves in this order.
 
-### 4.3 Who moves first (decision 4)
+### 4.3 Who moves first (D11)
 
 - In the main game, the first mover is drawn by the seeded RNG (a fair coin).
 - When we estimate win probabilities (§5), every start position is played twice, once with each side
   moving first. This guarantees p(d, d) is symmetric.
 
-### 4.4 Terminal states and winner (decisions 2 and 3)
+### 4.4 Terminal states and winner (D10, D14)
 
 The battle ends when either of these happens:
 
@@ -271,7 +271,7 @@ The battle ends when either of these happens:
 units can never die on the same ply, and both sides can never be eliminated at once. P4 adds a
 property test asserting this instead of special-casing it.
 
-### 4.5 Evaluation and terminal utility (decision 5)
+### 4.5 Evaluation and terminal utility (D12)
 
 Both are shared by minimax and alpha-beta. Scores are from the searching side's point of view.
 
@@ -327,7 +327,7 @@ Measured in P4 (E3):
 - The estimates replace p_row and p_col in the A-vs-A cell. When the depths differ, the encounter
   game becomes a general (asymmetric) bimatrix game.
 
-**The indifference principle (classic viva material).**
+**The indifference principle.**
 
 - In a fully mixed equilibrium, *my* mixing probabilities are whatever makes *the opponent*
   indifferent among their actions. So my mix depends only on **the opponent's** payoffs, and the
@@ -356,7 +356,7 @@ Measured in P4 (E3):
     equilibrium; `tests/test_predictions_analytic.py` checks this.
 - The pre-registered form of this prediction is H3 in [PREDICTIONS.md](PREDICTIONS.md).
 
-**Which p each experiment uses (decision 7).**
+**Which p each experiment uses (D20).**
 
 - E1 and E2 use p = ½ from the config. This isolates the effect of depth on the battles themselves.
 - E4 uses the measured p(dᵢ, dⱼ), which implies both agents know each other's depth (common
@@ -366,9 +366,8 @@ Measured in P4 (E3):
 
 ## 6. Agents (`agents/`; `config/agents.yaml`)
 
-Interface (sketch, finalized in P5). The proposal's agent loop is *observe → evaluate → choose →
-receive payoff → update*. The original prompt had only `choose`; `observe` is added so learning agents
-can update (§9 b).
+Interface. The proposal's agent loop is *observe → evaluate → choose → receive payoff → update*.
+`choose` covers the decision and `observe` covers the update, so learning agents can learn (D15).
 
 ```python
 class Agent(Protocol):
@@ -384,10 +383,10 @@ the turn number, and both battle depths.
 
 | Agent | Encounter policy |
 |---|---|
-| PureHeuristic | Attack iff V > T (T = 5), else Expand. "Above a threshold", as in the proposal (decision e). |
+| PureHeuristic | Attack iff V > T (T = 5), else Expand. "Above a threshold", as in the proposal (D16). |
 | FixedMixed | (A, D, E) = (0.40, 0.35, 0.25) |
 | Equilibrium | Plays its Nash mixed strategy for the current matrix. With several equilibria: maximize own expected payoff, then break ties lexicographically. |
-| ExpectedUtility | Best response to a model of the opponent. The model is the opponent's empirical action frequencies plus a Dirichlet(1,1,1) prior (fictitious play), **kept separately for each V** (decision 8), because PureHeuristic's play depends on V. Ties are broken A before D before E. |
+| ExpectedUtility | Best response to a model of the opponent. The model is the opponent's empirical action frequencies plus a Dirichlet(1,1,1) prior (fictitious play), **kept separately for each V** (D17), because PureHeuristic's play depends on V. Ties are broken A before D before E. |
 | DepthLimited(d), d ∈ {1,3,5} | Equilibrium encounter policy, so **only** the battle depth differs |
 
 **Two documented caveats.**
@@ -443,7 +442,7 @@ the turn number, and both battle depths.
 | E4 | Coupling: measure p(dᵢ,dⱼ), rebuild the bimatrix, recompute equilibria, compare with H3 | as configured |
 | E5 | ±25% sensitivity on V, c, d plus a V sweep | as configured |
 
-**H2 vs E2 (decision 6).**
+**H2 vs E2 (D21).**
 
 - H2 is measured at **battle level**: each depth against a fixed depth-1 opponent from frozen start
   positions.
