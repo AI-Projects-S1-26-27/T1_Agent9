@@ -1,0 +1,26 @@
+# Battle Mode (sequential layer). See docs/DESIGN.md section 4.
+schema_version: 1
+
+units_per_side: 2
+hp_range: [2, 3]            # starting HP per unit, drawn uniformly by the seeded RNG
+start_positions: [Front, Back]   # each unit starts in one of these, drawn by the RNG
+strike_damage: 1
+ply_cap: 10
+
+allowed_depths: [1, 3, 5]
+
+# Heuristic evaluation, used ONLY at the depth cutoff of a non-terminal state.
+# Shared by minimax and alpha-beta.
+evaluation:
+  hp_weight: 10             # per point of (my in-battle HP - their in-battle HP)
+  front_weight: 2           # per unit of (my Front units - their Front units)
+
+# Exact utility of a terminal state: win_utility * outcome + (my HP - their HP),
+# outcome in {+1, 0, -1}. win_utility must exceed the largest possible |evaluation|
+# (10*6 + 2*2 = 64) so a proven win always beats any heuristic score.
+terminal:
+  win_utility: 1000
+
+# Phase-4 feasibility gate: if plain minimax at depth 5 takes longer than this
+# per decision on our laptops, shrink the battle (HP or units). Never drop depth 5.
+depth5_gate_seconds: 2.0
