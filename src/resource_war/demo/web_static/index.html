@@ -1,0 +1,159 @@
+<!doctype html>
+<!-- Resource War: game-style demo. Owner: Rohit Gangil, Reviewer: Atharv Singhal -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resource War</title>
+<meta name="description" content="Watch or play a territory-conquest game where every decision is explained: payoff matrices, Nash equilibria, minimax and alpha-beta search.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 3l15 15-15 27L9 18z' fill='%231baf7a'/%3E%3Cpath d='M24 3v42L9 18z' fill='%233987e5'/%3E%3Cpath d='M24 3l15 15-15 27z' fill='%23d95926' opacity='.9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-attack" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3.5h-3.6L8 11.9l4.1 4.1L20.5 7.6V3.5z" fill="currentColor" fill-opacity=".25"/><path d="M5.6 12.6l5.8 5.8"/><path d="M8.2 15.8L3.6 20.4"/></g></symbol>
+    <symbol id="i-defend" viewBox="0 0 24 24"><path d="M12 2.8l7.6 3.1v5.5c0 4.7-3.2 8.6-7.6 10.1-4.4-1.5-7.6-5.4-7.6-10.1V5.9z" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 6.5v11" stroke="currentColor" stroke-width="1.6" opacity=".7"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V3.5"/><path d="M6 4.2h11.5l-2.6 4.1 2.6 4.1H6" fill="currentColor" fill-opacity=".25"/><path d="M3.5 21h6"/></g></symbol>
+    <symbol id="i-crystal" viewBox="0 0 24 24"><path d="M12 2l7 7-7 13-7-13z" fill="#1baf7a" stroke="#0c5c41" stroke-width="1"/><path d="M12 2v20l-7-13z" fill="#6fdcb2" opacity=".5"/></symbol>
+    <symbol id="i-castle" viewBox="0 0 24 24"><path d="M3 21V9h3v2h2V9h3v2h2V9h3v2h2V9h3v12h-7v-4.5a2 2 0 00-4 0V21z" fill="currentColor"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M12 5l8 9h-5v5H9v-5H4z"/></symbol>
+    <symbol id="i-diamond" viewBox="0 0 24 24"><path d="M12 3l8 9-8 9-8-9z"/></symbol>
+    <symbol id="i-first" viewBox="0 0 24 24"><path d="M6 5v14M19 5l-9 7 9 7z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M16 5l-9 7 9 7z" fill="currentColor"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M8 5l9 7-9 7z" fill="currentColor"/></symbol>
+    <symbol id="i-last" viewBox="0 0 24 24"><path d="M18 5v14M5 5l9 7-9 7z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5l13 7.5-13 7.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 7L4.5 11.5 9 16M5 11.5h9.5a5 5 0 010 10H11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.6" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l9 9M20 4l-9 9M7 14l3 3M17 14l-3 3M5 19l3-3M19 19l-3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Resource War home">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M24 2.5l18 9.8v23.4L24 45.5 6 35.7V12.3z" fill="#151a33" stroke="#3d477a" stroke-width="2"/>
+      <path d="M24 8l11 11-11 21-11-21z" fill="#1baf7a"/>
+      <path d="M24 8v32L13 19z" fill="#3987e5"/>
+      <path d="M24 8l11 11-11 21z" fill="#d95926"/>
+      <path d="M13 19h22" stroke="#151a33" stroke-width="1.5"/>
+      <path d="M24 8v32" stroke="#d9b45b" stroke-width="1.5"/>
+    </svg>
+    <span><span class="brand-name">Resource War</span><span class="brand-team">Agent9, CS F407</span></span>
+  </a>
+  <nav class="modes" aria-label="Mode">
+    <button type="button" data-mode="watch" aria-pressed="true" title="Watch two AI agents play">Watch</button>
+    <button type="button" data-mode="play" aria-pressed="false" title="Play against an AI agent">Play</button>
+    <button type="button" data-mode="explore" aria-pressed="false" title="Change the payoffs and see the game theory update">Explore</button>
+  </nav>
+
+  <form class="setup" id="setup-watch" autocomplete="off" novalidate>
+    <div class="field"><label for="w-a"><span class="side-tag" style="--c: var(--blue)">Blue</span></label><select id="w-a"></select></div>
+    <div class="field"><label for="w-da">Blue looks ahead</label><select id="w-da"></select></div>
+    <div class="field"><label for="w-b"><span class="side-tag" style="--c: var(--orange)">Orange</span></label><select id="w-b"></select></div>
+    <div class="field"><label for="w-db">Orange looks ahead</label><select id="w-db"></select></div>
+    <div class="field"><label for="w-seed">Seed</label><input id="w-seed" type="number" min="0" max="4294967295" step="1" value="7"></div>
+    <button type="button" class="btn btn-icon" data-dice="w-seed" aria-label="Pick a random seed"><svg><use href="#i-dice"/></svg></button>
+    <button type="submit" class="btn btn-primary">New match</button>
+  </form>
+  <form class="setup" id="setup-play" autocomplete="off" novalidate hidden>
+    <div class="field"><label for="p-opp"><span class="side-tag" style="--c: var(--orange)">Your opponent</span></label><select id="p-opp"></select></div>
+    <div class="field"><label for="p-dy">You look ahead</label><select id="p-dy"></select></div>
+    <div class="field"><label for="p-do">They look ahead</label><select id="p-do"></select></div>
+    <div class="field"><label for="p-seed">Seed</label><input id="p-seed" type="number" min="0" max="4294967295" step="1" value="7"></div>
+    <button type="button" class="btn btn-icon" data-dice="p-seed" aria-label="Pick a random seed"><svg><use href="#i-dice"/></svg></button>
+    <button type="submit" class="btn btn-primary">Start game</button>
+  </form>
+</header>
+
+<main class="stage" id="stage">
+  <section class="board-col" aria-label="Board">
+    <div class="score">
+      <div class="plate p0" id="plate0"><div class="token p0"><svg><use href="#i-chevron"/></svg></div><div class="who"><strong id="name0">Blue</strong><span id="stats0"></span></div><div class="pts" id="pts0">0</div></div>
+      <div class="turn-badge">Turn<b id="turn">0</b><span id="turnof">of 40</span></div>
+      <div class="plate p1" id="plate1"><div class="token p1"><svg><use href="#i-diamond"/></svg></div><div class="who"><strong id="name1">Orange</strong><span id="stats1"></span></div><div class="pts" id="pts1">0</div></div>
+    </div>
+    <div class="board-wrap">
+      <svg id="board" viewBox="-34 -34 834 834" role="img" aria-label="Game board"></svg>
+      <div class="busy" id="busy" hidden>Thinking</div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><svg><use href="#i-crystal"/></svg>Crystal (number = value)</span>
+      <span><svg style="color:var(--blue)"><use href="#i-castle"/></svg>Base</span>
+      <span><svg style="color:var(--ink-2)"><use href="#i-attack"/></svg>Attack</span>
+      <span><svg style="color:var(--ink-2)"><use href="#i-defend"/></svg>Defend</span>
+      <span><svg style="color:var(--ink-2)"><use href="#i-expand"/></svg>Expand</span>
+      <span>Tinted tile = owned</span>
+    </div>
+  </section>
+
+  <section class="panel" id="panel" aria-live="polite">
+    <div class="error" id="error" role="alert" hidden></div>
+    <div class="step-head"><h1 id="title">Loading</h1><p class="where" id="where"></p></div>
+    <ul class="story" id="story"></ul>
+    <div id="detail"></div>
+  </section>
+</main>
+
+<main class="explore" id="explore" hidden>
+  <section class="sliders" aria-label="Rule settings">
+    <p class="big-banner" id="x-banner"></p>
+    <div class="slider"><label for="x-v">Crystal value V <output id="o-v">6</output></label><input id="x-v" type="range" min="0.5" max="12" step="0.5" value="6"></div>
+    <div class="slider"><label for="x-c">Attack cost c <output id="o-c">2</output></label><input id="x-c" type="range" min="0" max="5" step="0.25" value="2"></div>
+    <div class="slider"><label for="x-d">Defend cost d <output id="o-d">1</output></label><input id="x-d" type="range" min="0" max="3" step="0.25" value="1"></div>
+    <div class="slider"><label for="x-pr">Blue wins a battle with probability <output id="o-pr">0.5</output></label><input id="x-pr" type="range" min="0" max="1" step="0.05" value="0.5"></div>
+    <div class="slider"><label for="x-pc">Orange wins a battle with probability <output id="o-pc">0.5</output></label><input id="x-pc" type="range" min="0" max="1" step="0.05" value="0.5"></div>
+    <div class="regime"><div class="strip" id="x-strip"><span class="peace">peaceful</span><span class="edge"></span><span class="cycle">cyclic</span><i class="pin" id="x-pin"></i></div>
+      <div class="regime-cap"><span>V = 0</span><span id="x-2c">2c = 4</span><span>V = 12</span></div></div>
+  </section>
+  <section aria-label="Analysis" id="x-out"></section>
+</main>
+
+<footer class="timeline" id="timeline">
+  <div class="controls">
+    <button type="button" class="btn btn-icon" id="b-first" aria-label="First step"><svg><use href="#i-first"/></svg></button>
+    <button type="button" class="btn btn-icon" id="b-prev" aria-label="Previous step"><svg><use href="#i-prev"/></svg></button>
+    <button type="button" class="btn btn-icon" id="b-play" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+    <button type="button" class="btn btn-icon" id="b-next" aria-label="Next step"><svg><use href="#i-next"/></svg></button>
+    <button type="button" class="btn btn-icon" id="b-last" aria-label="Last step"><svg><use href="#i-last"/></svg></button>
+  </div>
+  <div class="track-wrap">
+    <div class="marks" id="marks" aria-hidden="true"></div>
+    <label class="sr-only" for="scrub">Step</label>
+    <input type="range" id="scrub" min="0" max="0" value="0">
+    <div class="where-now" id="where-now"></div>
+  </div>
+  <div class="right">
+    <button type="button" class="btn" id="b-standoff"><svg><use href="#i-swords"/></svg>Next standoff</button>
+    <button type="button" class="btn" id="b-undo" hidden><svg><use href="#i-undo"/></svg>Undo my last choice</button>
+    <div class="field"><label for="speed" class="sr-only">Speed</label><select id="speed"><option value="1600">Slow</option><option value="850" selected>Normal</option><option value="350">Fast</option></select></div>
+    <button type="button" class="btn" id="how">How it works</button>
+    <span class="keys">Arrows step, space plays, N jumps</span>
+  </div>
+</footer>
+
+<dialog id="rules" aria-labelledby="rules-title">
+  <h2 id="rules-title">How it works</h2>
+  <p>Two sides send three units each across an 8 by 8 map to collect crystals. Score is crystals collected plus tiles owned after 40 turns. Movement is the same simple rule for everyone, so the only thing that differs between players is how they decide.</p>
+  <h3>Standoffs</h3>
+  <p>When both sides reach the same crystal, each secretly picks Attack, Defend or Expand. For a crystal worth V, with attack cost c = 2 and defend cost d = 1, Blue's payoff is:</p>
+  <table><tr><th></th><th>Orange attacks</th><th>Orange defends</th><th>Orange expands</th></tr>
+    <tr><th>Blue attacks</th><td>battle: V − c if Blue wins</td><td>−c</td><td>V − c</td></tr>
+    <tr><th>Blue defends</th><td>V − d</td><td>−d</td><td>−d</td></tr>
+    <tr><th>Blue expands</th><td>0</td><td>V</td><td>V/2</td></tr></table>
+  <p>Below V = 2c, expanding is always better than attacking, so both sides build and share. Above it, the game turns into rock-paper-scissors and the best play is to mix.</p>
+  <h3>Battles</h3>
+  <p>If both attack, two units each fight on a front and rear rank for up to 10 moves. Each side looks ahead with minimax; alpha-beta pruning finds the same move while checking fewer positions. More HP left in the fight wins the crystal.</p>
+  <h3>Every step is explained</h3>
+  <p>Use the timeline to step forward and back. Each standoff shows why each side chose what it did, the payoff matrix, and the Nash equilibrium. Each battle move shows what the search looked at and how much alpha-beta saved.</p>
+  <form method="dialog"><button class="btn btn-primary">Got it</button></form>
+</dialog>
+
+<script src="/app.js"></script>
+</body>
+</html>
