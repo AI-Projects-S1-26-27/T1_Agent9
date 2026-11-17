@@ -1,0 +1,32 @@
+# Encounter game (simultaneous layer). See docs/DESIGN.md section 2.
+# Every payoff matrix, dominance check, equilibrium and Pareto analysis in the
+# project is computed from THIS file; nothing is hard-coded elsewhere.
+#
+# Numbers are converted to exact fractions on load via Fraction(str(x)), so
+# 0.5 means exactly 1/2. Write decimals that are exact in base 10.
+#
+# Row player's payoff (column's is the mirror image, with its own win prob):
+#            A              D       E
+#    A   p_row*V - c       -c     V - c
+#    D      V - d          -d      -d
+#    E        0             V      V/2
+
+schema_version: 1
+
+actions: [A, D, E]          # Attack, Defend, Expand. Order is significant:
+                            # it is the matrix row/column order and the
+                            # lexicographic tie-break order everywhere.
+
+attack_cost: 2              # c: paid by every attacker, win or lose
+defend_cost: 1              # d: paid by every defender (fortifying costs effort)
+
+# Battle Mode outcome probabilities for an Attack-vs-Attack cell.
+# p_row = P(row player wins the battle), p_col = P(column player wins).
+# 1 - p_row - p_col = P(tie); on a tie both attackers still pay c and the cell
+# stays neutral. Default 1/2 each (no ties) for the configuration explorer;
+# experiment E4 replaces these with measured values.
+battle_win_prob:
+  row: 0.5
+  col: 0.5
+
+resource_values: [2, 4, 6, 8]   # possible cell values V
