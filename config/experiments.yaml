@@ -1,0 +1,38 @@
+# Experiment parameters. See docs/DESIGN.md section 8 and docs/PREDICTIONS.md.
+# Every result file records this config, the seeds and the git commit hash.
+schema_version: 1
+
+base_seed: 2026
+
+statistics:
+  confidence: 0.95
+  bootstrap_resamples: 10000      # whole games are resampled
+
+E1_round_robin:
+  agents: [pure_heuristic, fixed_mixed, equilibrium, expected_utility]
+  battle_depth: 3
+  seeds_per_pairing: 200          # each seed is played twice, sides swapped
+  battle_win_prob: config         # use payoffs.yaml (p = 1/2)
+
+E2_depth:
+  pairings: [[1, 3], [1, 5], [3, 5]]
+  seeds_per_pairing: 200          # each seed is played twice, sides swapped
+  battle_win_prob: config         # p = 1/2: isolates the effect of depth on battles
+
+H2_battle_depth:
+  fixed_opponent_depth: 1
+  start_positions: 500            # each played twice, first mover swapped
+
+E3_alphabeta_benchmark:
+  positions: 500                  # generated once, saved, never regenerated
+  depths: [1, 2, 3, 4, 5]
+
+E4_coupling:
+  depth_pairs: [[1, 3], [1, 5], [3, 5]]   # cut order: reduce to [[1, 5]] if late
+  start_positions: 500            # each played twice, first mover swapped
+  resource_value: 6
+  realized_encounters: 2000       # H3c: simulated encounters per depth pair
+
+E5_sensitivity:
+  scale_factors: [0.75, 1.0, 1.25]   # applied to V, c and d independently
+  values: [2, 4, 6, 8]

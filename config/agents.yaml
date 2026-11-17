@@ -1,0 +1,22 @@
+# Agent parameters. See docs/DESIGN.md section 6.
+schema_version: 1
+
+pure_heuristic:
+  threshold: 5              # Attack iff V > threshold ("above", as in the proposal), else Expand
+
+fixed_mixed:
+  probabilities: {A: 0.40, D: 0.35, E: 0.25}
+
+equilibrium:
+  # Among the equilibria found, pick the one maximising own expected payoff,
+  # then break ties lexicographically on (own strategy, opponent strategy).
+  selection: max_own_payoff_then_lexicographic
+
+expected_utility:
+  dirichlet_prior: [1, 1, 1]      # pseudo-counts for A, D, E (fictitious play)
+  counts_per_value: true          # separate opponent model for each V
+  tie_break: lexicographic        # A before D before E
+
+depth_limited:
+  depths: [1, 3, 5]
+  encounter_policy: equilibrium   # only the battle depth differs between these agents

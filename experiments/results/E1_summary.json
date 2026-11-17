@@ -1,0 +1,449 @@
+{
+ "seeds": [
+  102026,
+  102226
+ ],
+ "battle_depth": 3,
+ "pairings": [
+  {
+   "pairing": "PureHeuristic vs FixedMixed",
+   "first": "pure_heuristic",
+   "second": "fixed_mixed",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.375,
+    "low": 0.328957079463163,
+    "high": 0.4234209941204111
+   },
+   "second_win_rate": {
+    "estimate": 0.6075,
+    "low": 0.5588413833413011,
+    "high": 0.6541134733768252
+   },
+   "tie_rate": {
+    "estimate": 0.0175,
+    "low": 0.008502291107038101,
+    "high": 0.03567707292555803
+   },
+   "mean_score_diff": {
+    "estimate": -9.495,
+    "low": -12.820249999999998,
+    "high": -6.395
+   },
+   "verdict": "second beats first",
+   "first_mean_score": 89.525,
+   "second_mean_score": 99.02,
+   "first_mean_resources": 103.35,
+   "second_mean_resources": 113.35,
+   "first_mean_territory": 8.255,
+   "second_mean_territory": 8.255,
+   "mean_encounters": 19.5,
+   "mean_battles": 4.46
+  },
+  {
+   "pairing": "PureHeuristic vs Equilibrium",
+   "first": "pure_heuristic",
+   "second": "equilibrium",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.58,
+    "low": 0.5310957511319983,
+    "high": 0.6273822817745143
+   },
+   "second_win_rate": {
+    "estimate": 0.375,
+    "low": 0.328957079463163,
+    "high": 0.4234209941204111
+   },
+   "tie_rate": {
+    "estimate": 0.045,
+    "low": 0.028651458653886002,
+    "high": 0.0700047291903238
+   },
+   "mean_score_diff": {
+    "estimate": 6.285,
+    "low": 4.204875000000001,
+    "high": 8.375
+   },
+   "verdict": "first beats second",
+   "first_mean_score": 102.4275,
+   "second_mean_score": 96.1425,
+   "first_mean_resources": 116.19,
+   "second_mean_resources": 100.02,
+   "first_mean_territory": 8.2475,
+   "second_mean_territory": 8.2475,
+   "mean_encounters": 19.495,
+   "mean_battles": 5.215
+  },
+  {
+   "pairing": "PureHeuristic vs ExpectedUtility",
+   "first": "pure_heuristic",
+   "second": "expected_utility",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.04,
+    "low": 0.024769063069711755,
+    "high": 0.06398224771784101
+   },
+   "second_win_rate": {
+    "estimate": 0.93,
+    "low": 0.9006910535722495,
+    "high": 0.9511283733002555
+   },
+   "tie_rate": {
+    "estimate": 0.03,
+    "low": 0.01724302096514305,
+    "high": 0.05169853570909566
+   },
+   "mean_score_diff": {
+    "estimate": -54.92,
+    "low": -60.74,
+    "high": -49.355
+   },
+   "verdict": "second beats first",
+   "first_mean_score": 76.105,
+   "second_mean_score": 131.025,
+   "first_mean_resources": 88.46,
+   "second_mean_resources": 130.64,
+   "first_mean_territory": 8.445,
+   "second_mean_territory": 8.445,
+   "mean_encounters": 19.06,
+   "mean_battles": 0.0
+  },
+  {
+   "pairing": "FixedMixed vs Equilibrium",
+   "first": "fixed_mixed",
+   "second": "equilibrium",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.3775,
+    "low": 0.33137162500063877,
+    "high": 0.42595888711126384
+   },
+   "second_win_rate": {
+    "estimate": 0.61,
+    "low": 0.5613714064462345,
+    "high": 0.6565358888002202
+   },
+   "tie_rate": {
+    "estimate": 0.0125,
+    "low": 0.005350750779971615,
+    "high": 0.028923736195967477
+   },
+   "mean_score_diff": {
+    "estimate": -5.7925,
+    "low": -7.9500625,
+    "high": -3.6175
+   },
+   "verdict": "second beats first",
+   "first_mean_score": 96.0425,
+   "second_mean_score": 101.835,
+   "first_mean_resources": 110.72,
+   "second_mean_resources": 105.795,
+   "first_mean_territory": 8.1075,
+   "second_mean_territory": 8.05,
+   "mean_encounters": 19.58,
+   "mean_battles": 2.1375
+  },
+  {
+   "pairing": "FixedMixed vs ExpectedUtility",
+   "first": "fixed_mixed",
+   "second": "expected_utility",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.1875,
+    "low": 0.15228915456130326,
+    "high": 0.22865602939763208
+   },
+   "second_win_rate": {
+    "estimate": 0.795,
+    "low": 0.7527205845205713,
+    "high": 0.8316671618221938
+   },
+   "tie_rate": {
+    "estimate": 0.0175,
+    "low": 0.008502291107038101,
+    "high": 0.03567707292555803
+   },
+   "mean_score_diff": {
+    "estimate": -19.18,
+    "low": -22.225,
+    "high": -16.2
+   },
+   "verdict": "second beats first",
+   "first_mean_score": 94.5125,
+   "second_mean_score": 113.6925,
+   "first_mean_resources": 108.88,
+   "second_mean_resources": 108.02,
+   "first_mean_territory": 8.2575,
+   "second_mean_territory": 8.2575,
+   "mean_encounters": 19.285,
+   "mean_battles": 0.065
+  },
+  {
+   "pairing": "Equilibrium vs ExpectedUtility",
+   "first": "equilibrium",
+   "second": "expected_utility",
+   "first_depth": 3,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.5575,
+    "low": 0.5085079945949651,
+    "high": 0.6053980915565909
+   },
+   "second_win_rate": {
+    "estimate": 0.3825,
+    "low": 0.33620468254006386,
+    "high": 0.43103070662849585
+   },
+   "tie_rate": {
+    "estimate": 0.06,
+    "low": 0.0406479701137247,
+    "high": 0.0877228489004562
+   },
+   "mean_score_diff": {
+    "estimate": 3.26,
+    "low": 0.335,
+    "high": 5.950124999999998
+   },
+   "verdict": "first beats second",
+   "first_mean_score": 110.4,
+   "second_mean_score": 107.14,
+   "first_mean_resources": 114.225,
+   "second_mean_resources": 103.515,
+   "first_mean_territory": 8.335,
+   "second_mean_territory": 8.335,
+   "mean_encounters": 19.315,
+   "mean_battles": 0.35
+  }
+ ],
+ "h4": {
+  "eq_vs_fm": [
+   {
+    "x": "equilibrium",
+    "y": "fixed_mixed",
+    "value": 2.0,
+    "encounters": 1342,
+    "x_mean": 0.9538002980625931,
+    "y_mean": -0.11698956780923994,
+    "diff": {
+     "estimate": 1.0707898658718331,
+     "low": 0.996388502175593,
+     "high": 1.146484026693015
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "fixed_mixed",
+    "value": 4.0,
+    "encounters": 2139,
+    "x_mean": 1.9214586255259467,
+    "y_mean": 0.9326788218793829,
+    "diff": {
+     "estimate": 0.9887798036465638,
+     "low": 0.8621606195236332,
+     "high": 1.1175931976821905
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "fixed_mixed",
+    "value": 6.0,
+    "encounters": 1990,
+    "x_mean": 1.5296482412060302,
+    "y_mean": 1.7422110552763819,
+    "diff": {
+     "estimate": -0.21256281407035177,
+     "low": -0.4200317425532462,
+     "high": -0.0010130065855832244
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "fixed_mixed",
+    "value": 8.0,
+    "encounters": 2361,
+    "x_mean": 2.166031342651419,
+    "y_mean": 2.4815756035578147,
+    "diff": {
+     "estimate": -0.3155442609063956,
+     "low": -0.5582185025649604,
+     "high": -0.07858300373544282
+    }
+   }
+  ],
+  "eq_vs_ph": [
+   {
+    "x": "equilibrium",
+    "y": "pure_heuristic",
+    "value": 2.0,
+    "encounters": 1300,
+    "x_mean": 1.0,
+    "y_mean": 1.0,
+    "diff": {
+     "estimate": 0.0,
+     "low": 0.0,
+     "high": 0.0
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "pure_heuristic",
+    "value": 4.0,
+    "encounters": 2096,
+    "x_mean": 2.0,
+    "y_mean": 2.0,
+    "diff": {
+     "estimate": 0.0,
+     "low": 0.0,
+     "high": 0.0
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "pure_heuristic",
+    "value": 6.0,
+    "encounters": 2038,
+    "x_mean": 0.6673209028459274,
+    "y_mean": 1.521099116781158,
+    "diff": {
+     "estimate": -0.8537782139352306,
+     "low": -1.0765360110439988,
+     "high": -0.6265128831996485
+    }
+   },
+   {
+    "x": "equilibrium",
+    "y": "pure_heuristic",
+    "value": 8.0,
+    "encounters": 2364,
+    "x_mean": 1.7673434856175974,
+    "y_mean": 2.0947546531302876,
+    "diff": {
+     "estimate": -0.32741116751269034,
+     "low": -0.6132514601853883,
+     "high": -0.033674416430746285
+    }
+   }
+  ],
+  "eu_vs_fm": [
+   {
+    "x": "expected_utility",
+    "y": "fixed_mixed",
+    "value": 2.0,
+    "encounters": 1308,
+    "x_mean": 0.9311926605504587,
+    "y_mean": -0.11467889908256881,
+    "diff": {
+     "estimate": 1.0458715596330275,
+     "low": 0.9344960269167442,
+     "high": 1.1592100157789904
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "fixed_mixed",
+    "value": 4.0,
+    "encounters": 2172,
+    "x_mean": 1.7513812154696133,
+    "y_mean": 0.9069981583793738,
+    "diff": {
+     "estimate": 0.8443830570902394,
+     "low": 0.6467228135584757,
+     "high": 1.0427766828984164
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "fixed_mixed",
+    "value": 6.0,
+    "encounters": 1996,
+    "x_mean": 2.6482965931863727,
+    "y_mean": 1.6923847695390781,
+    "diff": {
+     "estimate": 0.9559118236472945,
+     "low": 0.6503143527549159,
+     "high": 1.2537045063915295
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "fixed_mixed",
+    "value": 8.0,
+    "encounters": 2238,
+    "x_mean": 3.5603217158176945,
+    "y_mean": 2.415549597855228,
+    "diff": {
+     "estimate": 1.1447721179624666,
+     "low": 0.7614203567851671,
+     "high": 1.518170372924087
+    }
+   }
+  ],
+  "eu_vs_ph": [
+   {
+    "x": "expected_utility",
+    "y": "pure_heuristic",
+    "value": 2.0,
+    "encounters": 1328,
+    "x_mean": 1.0,
+    "y_mean": 1.0,
+    "diff": {
+     "estimate": 0.0,
+     "low": 0.0,
+     "high": 0.0
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "pure_heuristic",
+    "value": 4.0,
+    "encounters": 2136,
+    "x_mean": 2.0,
+    "y_mean": 2.0,
+    "diff": {
+     "estimate": 0.0,
+     "low": 0.0,
+     "high": 0.0
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "pure_heuristic",
+    "value": 6.0,
+    "encounters": 1948,
+    "x_mean": 3.4188911704312117,
+    "y_mean": -0.1026694045174538,
+    "diff": {
+     "estimate": 3.521560574948665,
+     "low": 3.1760722347629797,
+     "high": 3.809792843691149
+    }
+   },
+   {
+    "x": "expected_utility",
+    "y": "pure_heuristic",
+    "value": 8.0,
+    "encounters": 2212,
+    "x_mean": 5.987341772151899,
+    "y_mean": -0.8426763110307414,
+    "diff": {
+     "estimate": 6.83001808318264,
+     "low": 6.633136094674557,
+     "high": 7.003327787021631
+    }
+   }
+  ]
+ }
+}
