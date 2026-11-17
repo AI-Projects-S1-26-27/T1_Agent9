@@ -1,0 +1,37 @@
+<<<<<<< HEAD
+placement,targeting,tie_break,regrow_turns,seeds,mean_encounters,median_encounters,share_games_with_encounter,mean_value_at_encounter,distinct_values_seen,mean_first_encounter_turn
+point_symmetric,nearest,player_relative,,200,1.29,0.0,0.495,4.976744186046512,4,9.818181818181818
+point_symmetric,nearest,player_relative,8,200,14.02,14.0,0.965,5.092724679029957,4,14.937823834196891
+point_symmetric,nearest,absolute,,200,1.315,1.0,0.65,5.079847908745247,4,9.792307692307693
+point_symmetric,nearest,absolute,8,200,19.08,19.0,1.0,5.098008385744235,4,12.16
+point_symmetric,value_per_distance,player_relative,,200,1.46,2.0,0.54,4.575342465753424,4,9.972222222222221
+point_symmetric,value_per_distance,player_relative,8,200,14.8,16.0,0.96,5.6824324324324325,4,14.192708333333334
+point_symmetric,value_per_distance,absolute,,200,1.545,1.5,0.64,4.459546925566343,4,10.09375
+point_symmetric,value_per_distance,absolute,8,200,15.815,15.0,1.0,5.568763831805248,4,13.1
+band,nearest,player_relative,,200,1.68,2.0,0.6,4.940476190476191,4,9.383333333333333
+band,nearest,player_relative,8,200,14.43,14.0,0.97,5.058905058905059,4,13.984536082474227
+band,nearest,absolute,,200,2.15,2.0,0.86,5.055813953488372,4,9.244186046511627
+band,nearest,absolute,8,200,25.11,25.0,1.0,5.107128634010355,4,10.3
+band,value_per_distance,player_relative,,200,2.44,2.0,0.73,4.450819672131147,4,9.479452054794521
+band,value_per_distance,player_relative,8,200,19.15,20.0,1.0,5.454830287206266,4,12.025
+band,value_per_distance,absolute,,200,2.725,3.0,0.86,4.289908256880734,4,9.424418604651162
+band,value_per_distance,absolute,8,200,21.605,21.0,1.0,5.369590372598935,4,10.385
+=======
+placement,targeting,tie_break,regrow_turns,seeds,mean_encounters,median_encounters,share_games_with_encounter,mean_value_at_encounter,distinct_values_seen,mean_first_encounter_turn
+point_symmetric,nearest,player_relative,,200,1.29,0.0,0.495,4.976744186046512,4,9.818181818181818
+point_symmetric,nearest,player_relative,8,200,14.02,14.0,0.965,5.092724679029957,4,14.937823834196891
+point_symmetric,nearest,absolute,,200,1.315,1.0,0.65,5.079847908745247,4,9.792307692307693
+point_symmetric,nearest,absolute,8,200,19.08,19.0,1.0,5.098008385744235,4,12.16
+point_symmetric,value_per_distance,player_relative,,200,1.46,2.0,0.54,4.575342465753424,4,9.972222222222221
+point_symmetric,value_per_distance,player_relative,8,200,14.8,16.0,0.96,5.6824324324324325,4,14.192708333333334
+point_symmetric,value_per_distance,absolute,,200,1.545,1.5,0.64,4.459546925566343,4,10.09375
+point_symmetric,value_per_distance,absolute,8,200,15.815,15.0,1.0,5.568763831805248,4,13.1
+band,nearest,player_relative,,200,1.68,2.0,0.6,4.940476190476191,4,9.383333333333333
+band,nearest,player_relative,8,200,14.43,14.0,0.97,5.058905058905059,4,13.984536082474227
+band,nearest,absolute,,200,2.15,2.0,0.86,5.055813953488372,4,9.244186046511627
+band,nearest,absolute,8,200,25.11,25.0,1.0,5.107128634010355,4,10.3
+band,value_per_distance,player_relative,,200,2.44,2.0,0.73,4.450819672131147,4,9.479452054794521
+band,value_per_distance,player_relative,8,200,19.15,20.0,1.0,5.454830287206266,4,12.025
+band,value_per_distance,absolute,,200,2.725,3.0,0.86,4.289908256880734,4,9.424418604651162
+band,value_per_distance,absolute,8,200,21.605,21.0,1.0,5.369590372598935,4,10.385
+>>>>>>> be2b2a7b851cba3a6aa4db6021908e2418a293f8

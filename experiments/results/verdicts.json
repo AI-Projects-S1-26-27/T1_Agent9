@@ -1,0 +1,197 @@
+{
+ "H1": {
+  "H1a": {
+   "status": "supported",
+   "comparisons": 2500
+  },
+  "H1b": {
+   "status": "supported",
+   "depth5_mean_ratio": {
+    "estimate": 0.12785821873433673,
+    "low": 0.11943662326605207,
+    "high": 0.13649538328669894
+   }
+  },
+  "by_depth": {
+   "1": {
+    "positions": 500,
+    "mean_minimax_nodes": 6.55,
+    "mean_alphabeta_nodes": 6.55,
+    "mean_ratio": 1.0,
+    "mean_minimax_seconds": 6.583459969260729e-05,
+    "mean_alphabeta_seconds": 6.41873998392839e-05,
+    "all_same": true
+   },
+   "2": {
+    "positions": 500,
+    "mean_minimax_nodes": 36.846,
+    "mean_alphabeta_nodes": 20.338,
+    "mean_ratio": 0.5911946620317194,
+    "mean_minimax_seconds": 0.000379923200031044,
+    "mean_alphabeta_seconds": 0.00023000660014804453,
+    "all_same": true
+   },
+   "3": {
+    "positions": 500,
+    "mean_minimax_nodes": 202.164,
+    "mean_alphabeta_nodes": 66.576,
+    "mean_ratio": 0.38775174406856083,
+    "mean_minimax_seconds": 0.0020913166002719664,
+    "mean_alphabeta_seconds": 0.0007532302000618074,
+    "all_same": true
+   },
+   "4": {
+    "positions": 500,
+    "mean_minimax_nodes": 1106.9,
+    "mean_alphabeta_nodes": 170.802,
+    "mean_ratio": 0.2195683501333799,
+    "mean_minimax_seconds": 0.011596790600364329,
+    "mean_alphabeta_seconds": 0.0019536323998472654,
+    "all_same": true
+   },
+   "5": {
+    "positions": 500,
+    "mean_minimax_nodes": 6098.348,
+    "mean_alphabeta_nodes": 467.072,
+    "mean_ratio": 0.12785821873433673,
+    "mean_minimax_seconds": 0.06420251819997794,
+    "mean_alphabeta_seconds": 0.005424706799734849,
+    "all_same": true
+   }
+  }
+ },
+ "gate": {
+  "positions": 500,
+  "gate_seconds": 2.0,
+  "minimax_mean_seconds": 0.06420251819997794,
+  "minimax_max_seconds": 0.37292980001075193,
+  "minimax_p95_seconds": 0.1657756199972934,
+  "minimax_mean_nodes": 6098.348,
+  "minimax_max_nodes": 25269,
+  "estimate_full_tree_nodes": 37449,
+  "estimate_knuth_moore_best_case_leaves": 575,
+  "passed": true
+ },
+ "H2": {
+  "status": "refuted",
+  "refuting_pairs": [
+   "5-3"
+  ],
+  "proposal_criterion_met": true,
+  "note": "Supported means no pair shows a significant DECREASE with depth (pre-registered rule).",
+  "joint_3_vs_5": {
+   "win_win": 448,
+   "win_tie": 53,
+   "win_loss": 0,
+   "tie_win": 5,
+   "tie_tie": 148,
+   "tie_loss": 115,
+   "loss_win": 0,
+   "loss_tie": 12,
+   "loss_loss": 219
+  }
+ },
+ "H3": {
+  "H3a": {
+   "status": "not supported",
+   "checks": {
+    "3v1": true,
+    "5v1": true,
+    "5v3": false
+   }
+  },
+  "H3b": {
+   "status": "not supported",
+   "checks": {
+    "3v1": true,
+    "5v1": true,
+    "5v3": false
+   }
+  },
+  "H3c": {
+   "status": "not supported",
+   "checks": {
+    "3v1": true,
+    "5v1": false,
+    "5v3": false
+   }
+  },
+  "exploratory_by_measured_strength": {
+   "3v1": {
+    "stronger_by_measurement": "deep",
+    "indifference_prediction_holds": true,
+    "predicted_value_gap": 0.12788519108136231,
+    "realized_gap_ci": {
+     "estimate": 0.198,
+     "low": 0.0095,
+     "high": 0.392
+    }
+   },
+   "5v1": {
+    "stronger_by_measurement": "deep",
+    "indifference_prediction_holds": true,
+    "predicted_value_gap": 0.07083252235228032,
+    "realized_gap_ci": {
+     "estimate": 0.005,
+     "low": -0.192,
+     "high": 0.203
+    }
+   },
+   "5v3": {
+    "stronger_by_measurement": "shallow",
+    "indifference_prediction_holds": true,
+    "predicted_value_gap": -0.0012197016722297338,
+    "realized_gap_ci": {
+     "estimate": 0.0075,
+     "low": -0.187,
+     "high": 0.2005
+    }
+   }
+  }
+ },
+ "H4": {
+  "H4a": {
+   "status": "supported",
+   "checks": {
+    "vs FixedMixed V=6": true,
+    "vs FixedMixed V=8": true,
+    "vs PureHeuristic V=6": true,
+    "vs PureHeuristic V=8": true
+   }
+  },
+  "H4b": {
+   "status": "supported",
+   "checks": {
+    "vs PureHeuristic V=2": true,
+    "vs PureHeuristic V=4": true,
+    "vs FixedMixed V=2": true,
+    "vs FixedMixed V=4": true
+   }
+  },
+  "H4c": {
+   "status": "supported",
+   "checks": {
+    "V=2": true,
+    "V=4": true,
+    "V=6": true,
+    "V=8": true
+   }
+  },
+  "H4d": {
+   "status": "exploratory",
+   "pairings": {
+    "PureHeuristic vs FixedMixed": "second beats first",
+    "PureHeuristic vs Equilibrium": "first beats second",
+    "PureHeuristic vs ExpectedUtility": "second beats first",
+    "FixedMixed vs Equilibrium": "second beats first",
+    "FixedMixed vs ExpectedUtility": "second beats first",
+    "Equilibrium vs ExpectedUtility": "first beats second"
+   }
+  }
+ },
+ "E5": {
+  "status": "supported",
+  "mismatches": 0,
+  "grid_points": 108
+ }
+}

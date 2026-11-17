@@ -1,0 +1,137 @@
+{
+ "seeds": [
+  202026,
+  202226
+ ],
+ "pairings": [
+  {
+   "pairing": "depth 3 vs depth 1",
+   "first": "depth_limited",
+   "second": "depth_limited",
+   "first_depth": 3,
+   "second_depth": 1,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.545,
+    "low": 0.496002466449648,
+    "high": 0.5931414270602654
+   },
+   "second_win_rate": {
+    "estimate": 0.3825,
+    "low": 0.33620468254006386,
+    "high": 0.43103070662849585
+   },
+   "tie_rate": {
+    "estimate": 0.0725,
+    "low": 0.05095051840227674,
+    "high": 0.10218249325354675
+   },
+   "mean_score_diff": {
+    "estimate": 4.4125,
+    "low": 3.1899375000000005,
+    "high": 5.6625
+   },
+   "verdict": "first beats second",
+   "first_mean_score": 106.3375,
+   "second_mean_score": 101.925,
+   "first_mean_resources": 109.8325,
+   "second_mean_resources": 105.3475,
+   "first_mean_territory": 8.21,
+   "second_mean_territory": 8.22,
+   "mean_encounters": 18.83,
+   "mean_battles": 2.59,
+   "battles": 1036,
+   "deep_battle_win_rate": {
+    "estimate": 0.4874517374517375,
+    "low": 0.4571173626777102,
+    "high": 0.5178788256551852
+   }
+  },
+  {
+   "pairing": "depth 5 vs depth 1",
+   "first": "depth_limited",
+   "second": "depth_limited",
+   "first_depth": 5,
+   "second_depth": 1,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.4975,
+    "low": 0.44875888867958347,
+    "high": 0.5462886727920879
+   },
+   "second_win_rate": {
+    "estimate": 0.435,
+    "low": 0.3872626744968637,
+    "high": 0.48397392376659487
+   },
+   "tie_rate": {
+    "estimate": 0.0675,
+    "low": 0.04680146916375966,
+    "high": 0.09642666543540682
+   },
+   "mean_score_diff": {
+    "estimate": 1.475,
+    "low": 0.6424375000000005,
+    "high": 2.32
+   },
+   "verdict": "first beats second",
+   "first_mean_score": 105.465,
+   "second_mean_score": 103.99,
+   "first_mean_resources": 108.6525,
+   "second_mean_resources": 107.2975,
+   "first_mean_territory": 8.27,
+   "second_mean_territory": 8.205,
+   "mean_encounters": 18.81,
+   "mean_battles": 2.5,
+   "battles": 1000,
+   "deep_battle_win_rate": {
+    "estimate": 0.429,
+    "low": 0.3986535230179055,
+    "high": 0.45988987668704334
+   }
+  },
+  {
+   "pairing": "depth 5 vs depth 3",
+   "first": "depth_limited",
+   "second": "depth_limited",
+   "first_depth": 5,
+   "second_depth": 3,
+   "games": 400,
+   "first_win_rate": {
+    "estimate": 0.475,
+    "low": 0.4265327259812066,
+    "high": 0.5239428887355082
+   },
+   "second_win_rate": {
+    "estimate": 0.4525,
+    "low": 0.404404788515386,
+    "high": 0.5014988794463721
+   },
+   "tie_rate": {
+    "estimate": 0.0725,
+    "low": 0.05095051840227674,
+    "high": 0.10218249325354675
+   },
+   "mean_score_diff": {
+    "estimate": 0.5725,
+    "low": -0.19006249999999944,
+    "high": 1.3425
+   },
+   "verdict": "no detectable difference",
+   "first_mean_score": 104.6675,
+   "second_mean_score": 104.095,
+   "first_mean_resources": 108.0925,
+   "second_mean_resources": 107.5425,
+   "first_mean_territory": 8.22,
+   "second_mean_territory": 8.1675,
+   "mean_encounters": 18.8575,
+   "mean_battles": 2.545,
+   "battles": 1018,
+   "deep_battle_win_rate": {
+    "estimate": 0.3762278978388998,
+    "low": 0.3469869330370835,
+    "high": 0.40639946773507474
+   }
+  }
+ ]
+}
