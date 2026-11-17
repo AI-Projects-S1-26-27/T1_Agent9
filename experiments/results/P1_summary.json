@@ -1,0 +1,18 @@
+{
+ "chosen": {
+  "placement": "band",
+  "targeting": "value_per_distance",
+  "tie_break": "player_relative",
+  "regrow_turns": 8,
+  "seeds": 200,
+  "mean_encounters": 19.15,
+  "median_encounters": 20.0,
+  "share_games_with_encounter": 1.0,
+  "mean_value_at_encounter": 5.454830287206266,
+  "distinct_values_seen": 4,
+  "mean_first_encounter_turn": 12.025
+ },
+ "no_regrow_min_mean": 1.29,
+ "no_regrow_max_mean": 2.725,
+ "no_regrow_worst_share_without_encounter": 0.505
+}

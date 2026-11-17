@@ -1,0 +1,12 @@
+{
+ "positions": 500,
+ "gate_seconds": 2.0,
+ "minimax_mean_seconds": 0.06420251819997794,
+ "minimax_max_seconds": 0.37292980001075193,
+ "minimax_p95_seconds": 0.1657756199972934,
+ "minimax_mean_nodes": 6098.348,
+ "minimax_max_nodes": 25269,
+ "estimate_full_tree_nodes": 37449,
+ "estimate_knuth_moore_best_case_leaves": 575,
+ "passed": true
+}
