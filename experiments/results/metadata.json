@@ -1,0 +1,16 @@
+{
+ "git_commit": "no-commit-yet",
+ "generated_utc": "2026-11-13T11:11:58+00:00",
+ "quick_mode": false,
+ "python": "3.13.3",
+ "numpy": "2.4.6",
+ "nashpy": "0.0.43",
+ "base_seed": 2026,
+ "config_sha256": {
+  "agents.yaml": "46d136cad0d9fe2f5cd02af523bf3438e94c3b6e8dbc61692eca6e93fef1e558",
+  "battle.yaml": "c485a5dfdfc0ad8ca0ecbca0dfeb59e31f7b546467d443def9cf33b96c12df14",
+  "experiments.yaml": "e9c0254bea3bd2d47e097fca2c54f70ce3ea852c7b8ede813d2c60de5d8559d5",
+  "game.yaml": "63f31ac0dbbe9c73c40d48c85d6288a3a28bc30b35443bc75b9d9429d87cd25b",
+  "payoffs.yaml": "24821fa5b5358c4f4c208e84162beb473a11516f982e9ed725448dfc319cef20"
+ }
+}

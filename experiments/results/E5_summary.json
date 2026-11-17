@@ -1,0 +1,57 @@
+{
+ "grid_points": 108,
+ "distinct_games": 99,
+ "mismatches": [],
+ "degenerate_points": [
+  [
+   3.0,
+   1.5,
+   0.75
+  ],
+  [
+   3.0,
+   1.5,
+   1.0
+  ],
+  [
+   3.0,
+   1.5,
+   1.25
+  ],
+  [
+   4.0,
+   2.0,
+   0.75
+  ],
+  [
+   4.0,
+   2.0,
+   1.0
+  ],
+  [
+   4.0,
+   2.0,
+   1.25
+  ],
+  [
+   5.0,
+   2.5,
+   0.75
+  ],
+  [
+   5.0,
+   2.5,
+   1.0
+  ],
+  [
+   5.0,
+   2.5,
+   1.25
+  ]
+ ],
+ "structure_counts": {
+  "cyclic, unique fully mixed": 60,
+  "degenerate (continuum)": 9,
+  "pure (E,E) by iterated strict dominance": 39
+ }
+}

@@ -1,0 +1,212 @@
+{
+ "value": "6",
+ "pairs": [
+  {
+   "deep": 3,
+   "shallow": 1,
+   "battles": 1000,
+   "p_deep": "473/1000",
+   "p_shallow": "131/500",
+   "p_deep_float": 0.473,
+   "p_shallow_float": 0.262,
+   "tie_rate": 0.265,
+   "p_deep_ci": {
+    "estimate": 0.473,
+    "low": 0.4422178794680813,
+    "high": 0.5039887654901386
+   },
+   "p_shallow_ci": {
+    "estimate": 0.262,
+    "low": 0.23569393157936605,
+    "high": 0.2901276054597582
+   },
+   "h3a_diff": {
+    "estimate": 0.211,
+    "low": 0.143,
+    "high": 0.278
+   },
+   "deep_mix": [
+    "3250/7107",
+    "274/7107",
+    "3583/7107"
+   ],
+   "shallow_mix": [
+    "6500/13581",
+    "464/4527",
+    "5689/13581"
+   ],
+   "deep_mix_float": [
+    0.4572956240326439,
+    0.038553538764598286,
+    0.5041508372027579
+   ],
+   "shallow_mix_float": [
+    0.47860982254620427,
+    0.10249613430527943,
+    0.4188940431485163
+   ],
+   "symmetric_mix_float": [
+    0.48148148148148145,
+    0.1111111111111111,
+    0.4074074074074074
+   ],
+   "deep_value": 1.8716589352772255,
+   "shallow_value": 1.7437737441958632,
+   "symmetric_value": 1.8888888888888888,
+   "unique_equilibrium": true,
+   "nashpy_agrees": true,
+   "closed_form_valid": true,
+   "matches_closed_form": true,
+   "deep_attacks_less": true,
+   "deep_expands_more": true,
+   "deep_value_higher": true,
+   "realized_encounters": 2000,
+   "realized_deep_mean": 1.8785,
+   "realized_shallow_mean": 1.6805,
+   "h3c_diff": {
+    "estimate": 0.198,
+    "low": 0.0095,
+    "high": 0.392
+   },
+   "analysis_card": "GAME ANALYSIS: encounter V=6\nPayoffs (row player, column player):\n                A                    D                    E          \n    A  (419/500, -107/250)        (-2, 5)              (4, 0)        \n    D        (5, -2)             (-1, -1)              (-1, 6)       \n    E        (0, 4)               (6, -1)              (3, 3)        \nDominance (pure strategies):\n  Row: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Column: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Iterated strict elimination: nothing can be removed\n  Iterated weak elimination (order-dependent, may remove equilibria): nothing can be removed\nPure Nash equilibria: none\nNash equilibria (support_enumeration, exact):\n  [mixed] row [A=3250/7107, D=274/7107, E=3583/7107] (~[0.457, 0.039, 0.504]), column [A=6500/13581, D=464/4527, E=5689/13581] (~[0.479, 0.102, 0.419]), payoffs (8473/4527 (~1.872), 4131/2369 (~1.744))\n  note: Nondegenerate game: support enumeration finds every equilibrium.\nSelected by the Equilibrium agents (max own payoff, then lexicographic): row plays [A=3250/7107, D=274/7107, E=3583/7107] (~[0.457, 0.039, 0.504]), column plays [A=6500/13581, D=464/4527, E=5689/13581] (~[0.479, 0.102, 0.419])\nPareto-optimal outcomes: (A,E) = (4, 0), (D,E) = (-1, 6), (E,A) = (0, 4), (E,D) = (6, -1), (E,E) = (3, 3)\nInefficiency: equilibrium payoffs (8473/4527 (~1.872), 4131/2369 (~1.744)) are Pareto-dominated by (E,E) = (3, 3)"
+  },
+  {
+   "deep": 5,
+   "shallow": 1,
+   "battles": 1000,
+   "p_deep": "463/1000",
+   "p_shallow": "87/250",
+   "p_deep_float": 0.463,
+   "p_shallow_float": 0.348,
+   "tie_rate": 0.189,
+   "p_deep_ci": {
+    "estimate": 0.463,
+    "low": 0.43229566915425255,
+    "high": 0.49398751097367855
+   },
+   "p_shallow_ci": {
+    "estimate": 0.348,
+    "low": 0.31910940015314615,
+    "high": 0.3780539344264625
+   },
+   "h3a_diff": {
+    "estimate": 0.115,
+    "low": 0.043,
+    "high": 0.187
+   },
+   "deep_mix": [
+    "1625/3489",
+    "223/3489",
+    "547/1163"
+   ],
+   "shallow_mix": [
+    "500/1047",
+    "104/1047",
+    "443/1047"
+   ],
+   "deep_mix_float": [
+    0.46574949842361707,
+    0.06391516193751791,
+    0.470335339638865
+   ],
+   "shallow_mix_float": [
+    0.4775549188156638,
+    0.09933142311365807,
+    0.42311365807067813
+   ],
+   "symmetric_mix_float": [
+    0.48148148148148145,
+    0.1111111111111111,
+    0.4074074074074074
+   ],
+   "deep_value": 1.8653295128939829,
+   "shallow_value": 1.7944969905417025,
+   "symmetric_value": 1.8888888888888888,
+   "unique_equilibrium": true,
+   "nashpy_agrees": true,
+   "closed_form_valid": true,
+   "matches_closed_form": true,
+   "deep_attacks_less": true,
+   "deep_expands_more": true,
+   "deep_value_higher": true,
+   "realized_encounters": 2000,
+   "realized_deep_mean": 1.7975,
+   "realized_shallow_mean": 1.7925,
+   "h3c_diff": {
+    "estimate": 0.005,
+    "low": -0.192,
+    "high": 0.203
+   },
+   "analysis_card": "GAME ANALYSIS: encounter V=6\nPayoffs (row player, column player):\n               A                  D                  E         \n    A  (389/500, 11/125)       (-2, 5)            (4, 0)       \n    D       (5, -2)           (-1, -1)            (-1, 6)      \n    E       (0, 4)             (6, -1)            (3, 3)       \nDominance (pure strategies):\n  Row: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Column: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Iterated strict elimination: nothing can be removed\n  Iterated weak elimination (order-dependent, may remove equilibria): nothing can be removed\nPure Nash equilibria: none\nNash equilibria (support_enumeration, exact):\n  [mixed] row [A=1625/3489, D=223/3489, E=547/1163] (~[0.466, 0.064, 0.470]), column [A=500/1047, D=104/1047, E=443/1047] (~[0.478, 0.099, 0.423]), payoffs (651/349 (~1.865), 2087/1163 (~1.794))\n  note: Nondegenerate game: support enumeration finds every equilibrium.\nSelected by the Equilibrium agents (max own payoff, then lexicographic): row plays [A=1625/3489, D=223/3489, E=547/1163] (~[0.466, 0.064, 0.470]), column plays [A=500/1047, D=104/1047, E=443/1047] (~[0.478, 0.099, 0.423])\nPareto-optimal outcomes: (A,E) = (4, 0), (D,E) = (-1, 6), (E,A) = (0, 4), (E,D) = (6, -1), (E,E) = (3, 3)\nInefficiency: equilibrium payoffs (651/349 (~1.865), 2087/1163 (~1.794)) are Pareto-dominated by (E,E) = (3, 3)"
+  },
+  {
+   "deep": 5,
+   "shallow": 3,
+   "battles": 1000,
+   "p_deep": "191/500",
+   "p_shallow": "48/125",
+   "p_deep_float": 0.382,
+   "p_shallow_float": 0.384,
+   "tie_rate": 0.234,
+   "p_deep_ci": {
+    "estimate": 0.382,
+    "low": 0.35239145536552613,
+    "high": 0.4125116596370649
+   },
+   "p_shallow_ci": {
+    "estimate": 0.384,
+    "low": 0.35435414144032196,
+    "high": 0.4145336665283268
+   },
+   "h3a_diff": {
+    "estimate": -0.002,
+    "low": -0.073,
+    "high": 0.065
+   },
+   "deep_mix": [
+    "1625/3462",
+    "259/3462",
+    "263/577"
+   ],
+   "shallow_mix": [
+    "3250/6927",
+    "514/6927",
+    "3163/6927"
+   ],
+   "deep_mix_float": [
+    0.46938186019641825,
+    0.07481224725592144,
+    0.4558058925476603
+   ],
+   "shallow_mix_float": [
+    0.46917857658437995,
+    0.07420239641980655,
+    0.45661902699581347
+   ],
+   "symmetric_mix_float": [
+    0.48148148148148145,
+    0.1111111111111111,
+    0.4074074074074074
+   ],
+   "deep_value": 1.8150714595062798,
+   "shallow_value": 1.8162911611785095,
+   "symmetric_value": 1.8888888888888888,
+   "unique_equilibrium": true,
+   "nashpy_agrees": true,
+   "closed_form_valid": true,
+   "matches_closed_form": true,
+   "deep_attacks_less": false,
+   "deep_expands_more": false,
+   "deep_value_higher": false,
+   "realized_encounters": 2000,
+   "realized_deep_mean": 1.802,
+   "realized_shallow_mean": 1.7945,
+   "h3c_diff": {
+    "estimate": 0.0075,
+    "low": -0.187,
+    "high": 0.2005
+   },
+   "analysis_card": "GAME ANALYSIS: encounter V=6\nPayoffs (row player, column player):\n              A                 D                 E         \n    A  (73/250, 38/125)      (-2, 5)            (4, 0)      \n    D      (5, -2)           (-1, -1)          (-1, 6)      \n    E       (0, 4)           (6, -1)            (3, 3)      \nDominance (pure strategies):\n  Row: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Column: strictly dominated: none; weakly dominated: none; dominated by a mixture: none; dominant strategy: none\n  Iterated strict elimination: nothing can be removed\n  Iterated weak elimination (order-dependent, may remove equilibria): nothing can be removed\nPure Nash equilibria: none\nNash equilibria (support_enumeration, exact):\n  [mixed] row [A=1625/3462, D=259/3462, E=263/577] (~[0.469, 0.075, 0.456]), column [A=3250/6927, D=514/6927, E=3163/6927] (~[0.469, 0.074, 0.457]), payoffs (4191/2309 (~1.815), 1048/577 (~1.816))\n  note: Nondegenerate game: support enumeration finds every equilibrium.\nSelected by the Equilibrium agents (max own payoff, then lexicographic): row plays [A=1625/3462, D=259/3462, E=263/577] (~[0.469, 0.075, 0.456]), column plays [A=3250/6927, D=514/6927, E=3163/6927] (~[0.469, 0.074, 0.457])\nPareto-optimal outcomes: (A,E) = (4, 0), (D,E) = (-1, 6), (E,A) = (0, 4), (E,D) = (6, -1), (E,E) = (3, 3)\nInefficiency: equilibrium payoffs (4191/2309 (~1.815), 1048/577 (~1.816)) are Pareto-dominated by (E,E) = (3, 3)"
+  }
+ ]
+}
