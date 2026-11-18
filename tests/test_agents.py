@@ -134,3 +134,30 @@ def test_sample_action_validation_does_not_change_the_random_stream() -> None:
 def test_sample_action_never_returns_a_zero_probability_action() -> None:
     rng = np.random.default_rng(1)
     assert {sample_action((F(1, 2), F(0), F(1, 2)), rng) for _ in range(500)} <= {0, 2}
+
+
+@pytest.mark.parametrize("bad", [-1, 3, 7])
+def test_expected_utility_rejects_an_invalid_opponent_action(configs, bad) -> None:
+    agent = make_agent("expected_utility", configs.agents, 1)
+    with pytest.raises(ValueError, match="opp_action"):
+        agent.observe(state_for(configs, 6), ATTACK, bad, F(0))
+    assert agent.counts == {}  # nothing was recorded
+
+
+def test_depth_limited_plays_the_equilibrium_policy_and_only_the_depth_differs(configs) -> None:
+    eq = make_agent("equilibrium", configs.agents, 3)
+    for depth in (1, 3, 5):
+        dl = make_agent("depth_limited", configs.agents, depth)
+        assert dl.battle_depth == depth and dl.name == f"depth_limited_{depth}"
+        for v in (2, 4, 6, 8):
+            assert dl.strategy(state_for(configs, v)) == eq.strategy(state_for(configs, v))
+
+
+@pytest.mark.parametrize("v", [2, 4, 6, 8])
+def test_expected_utility_defends_against_an_opponent_that_always_attacks(configs, v) -> None:
+    agent = make_agent("expected_utility", configs.agents, 1)
+    s = state_for(configs, v)
+    for _ in range(30):
+        agent.observe(s, EXPAND, ATTACK, F(0))
+    assert agent.belief(s)[ATTACK] > F(9, 10)
+    assert agent.choose(s, np.random.default_rng(0)) == DEFEND
