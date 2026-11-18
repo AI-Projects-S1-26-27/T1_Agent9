@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import threading
 import traceback
 import webbrowser
@@ -127,9 +128,10 @@ def make_handler(configs: Configs):
     return Handler
 
 
-def make_server(port: int = 8765, configs: Configs | None = None) -> ThreadingHTTPServer:
+def make_server(port: int = 8765, configs: Configs | None = None, host: str = "127.0.0.1") -> ThreadingHTTPServer:
+    """Bind to ``host`` (loopback by default; use 0.0.0.0 only inside a container or on a host you control)."""
     configs = configs or load_all()
-    server = ThreadingHTTPServer(("127.0.0.1", port), make_handler(configs))
+    server = ThreadingHTTPServer((host, port), make_handler(configs))
     server.daemon_threads = True
     return server
 
@@ -145,13 +147,14 @@ def _warm_up(configs: Configs) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Agent9 Resource War: game-style web demo")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8765")))
+    parser.add_argument("--host", default="127.0.0.1", help="use 0.0.0.0 when deploying in a container")
     parser.add_argument("--no-browser", action="store_true")
     args = parser.parse_args(argv)
     configs = load_all()
-    server = make_server(args.port, configs)
+    server = make_server(args.port, configs, args.host)
     threading.Thread(target=_warm_up, args=(configs,), daemon=True).start()
-    url = f"http://127.0.0.1:{args.port}/"
+    url = f"http://{args.host}:{args.port}/"
     print(f"Resource War demo running at {url}  (Ctrl+C to stop)")
     if not args.no_browser:
         webbrowser.open(url)

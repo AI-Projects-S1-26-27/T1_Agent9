@@ -168,3 +168,11 @@ def test_server_blocks_path_traversal(server) -> None:
         with pytest.raises(urllib.error.HTTPError) as err:
             _get(server + path)
         assert err.value.code == 404
+
+
+def test_make_server_accepts_a_host() -> None:
+    srv = make_server(port=0, host="127.0.0.1")
+    try:
+        assert srv.server_address[0] == "127.0.0.1"
+    finally:
+        srv.server_close()
