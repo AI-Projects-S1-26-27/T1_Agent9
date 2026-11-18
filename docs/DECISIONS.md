@@ -156,7 +156,7 @@ report is written.
 |---|---|---|---|
 | Rohit Gangil | Integration, repo, CI, demo UI | Set up the repo; directed and reviewed the AI-assisted drafting; approved defaults 1–9 | Directed the AI-assisted build of all phases; demo modules (`demo/`) drafted: review pending |
 | Vaibhav Malik | Game engine | Review DESIGN §3 — pending | `engine/` drafted by AI: owner review pending |
-| Atharv Singhal | Encounter analysis | Review DESIGN §2 — pending | `encounter/` drafted by AI: owner review pending |
+| Atharv Singhal | Encounter analysis | Reviewed DESIGN §2 | Locked `config/payoffs.yaml`; reviewed and verified exact `Fraction` bimatrix builder and `realized_gains_and_costs` (`matrix.py`), strict/weak/LP dominance (`dominance.py`), pure Nash (`pure_nash.py`), Pareto optimality (`pareto.py`), and `analysis.py`. |
 | Gursidak Singh Bassi | Mixed Nash / verifier | Review DESIGN §2.3, §5 — pending | `equilibrium/` drafted by AI: owner review pending |
 | Harshit Agrawal | Battle Mode / minimax | Review DESIGN §4 — pending | `battle/` rules, evaluation, minimax, play drafted by AI: owner review pending |
 | Raunak Sarawgi | Alpha-beta / E3 | Review DESIGN §4.6–4.7 — pending | `battle/alphabeta.py`, `instrument.py`, `benchmark.py` drafted by AI: owner review pending |

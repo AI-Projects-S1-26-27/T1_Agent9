@@ -385,7 +385,7 @@ personally did, reviewed and can explain.)*
 |---|---|---|
 | Rohit Gangil | Integration, repo, CI, live demo UI | TODO |
 | Vaibhav Malik | Game engine | TODO |
-| Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | TODO |
+| Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | Specified locked 3x3 A/D/E encounter payoff parameters (`config/payoffs.yaml`), verified exact `Fraction` bimatrix construction and runtime payoff invariants (`matrix.py`), and implemented strict/iterated-weak/LP dominance (`dominance.py`), pure Nash enumeration (`pure_nash.py`), Pareto efficiency (`pareto.py`), and the Game Analysis card (`analysis.py`). |
 | Gursidak Singh Bassi | Mixed Nash, nashpy validation, verifier | TODO |
 | Harshit Agrawal | Battle Mode, evaluation, minimax | TODO |
 | Raunak Sarawgi | Alpha-beta, instrumentation, E3 | TODO |
