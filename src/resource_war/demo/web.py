@@ -79,15 +79,34 @@ def make_handler(configs: Configs):
                 super().log_message(fmt, *args)
 
         def _send(self, status: int, payload: bytes, content_type: str) -> None:
-            self.send_response(status)
+            self.send_response(int(status))
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(payload)))
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
-            self.wfile.write(payload)
+            if self.command != "HEAD":
+                self.wfile.write(payload)
 
         def _json(self, status: int, data: Any) -> None:
             self._send(status, json.dumps(data).encode("utf-8"), "application/json; charset=utf-8")
+
+        def do_HEAD(self) -> None:  # noqa: N802
+            path = self.path.split("?", 1)[0]
+            if path == "/api/meta":
+                payload = json.dumps(meta(configs)).encode("utf-8")
+                self._send(200, payload, "application/json; charset=utf-8")
+                return
+            if path == "/" or path == "/index.html":
+                target = STATIC / "index.html"
+            else:
+                target = (STATIC / path.lstrip("/")).resolve()
+            if STATIC not in target.parents or not target.is_file():
+                self._send(404, b"", "text/plain; charset=utf-8")
+                return
+            ctype = mimetypes.guess_type(target.name)[0] or "application/octet-stream"
+            if ctype.startswith("text/") or ctype in ("application/javascript", "image/svg+xml"):
+                ctype += "; charset=utf-8"
+            self._send(200, b"", ctype)
 
         def do_GET(self) -> None:  # noqa: N802
             path = self.path.split("?", 1)[0]
