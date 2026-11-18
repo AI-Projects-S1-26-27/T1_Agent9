@@ -1,11 +1,10 @@
-"""Exact linear-system solving over the rationals (Gauss-Jordan elimination).
+
+"""Exact linear-system solving using Gauss-Jordan elimination.
 
 Owner: Gursidak Singh Bassi, Reviewer: Atharv Singhal
 
-numpy.linalg.solve works in floats and cannot tell "singular" from "nearly
-singular". Equilibrium computation needs that distinction: a singular
-indifference system is the signature of a degenerate game (a whole line of
-solutions instead of one point). With Fractions the rank is exact.
+Uses Fraction arithmetic. Returns one of three statuses:
+unique, none (inconsistent), or infinite (underdetermined).
 """
 
 from __future__ import annotations
@@ -17,37 +16,81 @@ from fractions import Fraction
 
 @dataclass(frozen=True)
 class LinearSolution:
-    status: str  # "unique", "none" (inconsistent) or "infinite" (singular, consistent)
+    status: str
     x: tuple[Fraction, ...] | None = None
 
 
-def solve_exact(a: Sequence[Sequence[Fraction]], b: Sequence[Fraction]) -> LinearSolution:
-    """Solve a x = b exactly. ``a`` may be non-square."""
+def solve_exact(
+    a: Sequence[Sequence[Fraction]],
+    b: Sequence[Fraction],
+) -> LinearSolution:
+    """Solve a*x=b exactly, including rectangular systems.
+
+    Inputs should contain integers or exact rational values.
+    Malformed dimensions raise ValueError.
+    """
     rows = len(a)
     cols = len(a[0]) if rows else 0
-    m = [list(map(Fraction, a[i])) + [Fraction(b[i])] for i in range(rows)]
+
+    if len(b) != rows:
+        raise ValueError("right-hand side must have one entry per row")
+    if any(len(row) != cols for row in a):
+        raise ValueError("coefficient matrix must not be ragged")
+
+    augmented = [
+        [Fraction(value) for value in a[i]] + [Fraction(b[i])]
+        for i in range(rows)
+    ]
+
     pivots: list[int] = []
-    r = 0
-    for c in range(cols):
-        pivot = next((i for i in range(r, rows) if m[i][c] != 0), None)
+    pivot_row = 0
+
+    for col in range(cols):
+        pivot = next(
+            (
+                i for i in range(pivot_row, rows)
+                if augmented[i][col] != 0
+            ),
+            None,
+        )
         if pivot is None:
             continue
-        m[r], m[pivot] = m[pivot], m[r]
-        pv = m[r][c]
-        m[r] = [v / pv for v in m[r]]
+
+        augmented[pivot_row], augmented[pivot] = (
+            augmented[pivot],
+            augmented[pivot_row],
+        )
+
+        divisor = augmented[pivot_row][col]
+        augmented[pivot_row] = [
+            value / divisor for value in augmented[pivot_row]
+        ]
+
         for i in range(rows):
-            if i != r and m[i][c] != 0:
-                f = m[i][c]
-                m[i] = [x - f * y for x, y in zip(m[i], m[r])]
-        pivots.append(c)
-        r += 1
-        if r == rows:
+            if i == pivot_row or augmented[i][col] == 0:
+                continue
+            factor = augmented[i][col]
+            augmented[i] = [
+                value - factor * pivot_value
+                for value, pivot_value in zip(
+                    augmented[i], augmented[pivot_row]
+                )
+            ]
+
+        pivots.append(col)
+        pivot_row += 1
+        if pivot_row == rows:
             break
-    if any(all(v == 0 for v in row[:-1]) and row[-1] != 0 for row in m):
-        return LinearSolution("none")
+
+    for row in augmented:
+        if all(value == 0 for value in row[:-1]) and row[-1] != 0:
+            return LinearSolution("none")
+
     if len(pivots) < cols:
         return LinearSolution("infinite")
-    x = [Fraction(0)] * cols
-    for i, c in enumerate(pivots):
-        x[c] = m[i][-1]
-    return LinearSolution("unique", tuple(x))
+
+    solution = [Fraction(0)] * cols
+    for row_index, col_index in enumerate(pivots):
+        solution[col_index] = augmented[row_index][-1]
+
+    return LinearSolution("unique", tuple(solution))

@@ -1,103 +1,175 @@
-"""Exact vertex enumeration of best-response polytopes (for degenerate games).
+
+"""Exact vertex enumeration of labelled best-response polytopes.
 
 Owner: Gursidak Singh Bassi, Reviewer: Atharv Singhal
 
-Why we need it: in a degenerate game (such as V = 4 in our encounter game)
-the equilibria can form a continuum. Support enumeration with equal-size
-supports then returns only part of the answer; at V = 4 it finds (E,E) but
-misses three of the four extreme equilibria. Vertex enumeration finds every
-EXTREME equilibrium, and every equilibrium is a convex combination of
-extreme ones within its component.
+Positive payoff shifts preserve best responses. We construct:
+    P = {x >= 0: B_positive.T*x <= 1}
+    Q = {y >= 0: A_positive*y <= 1}
 
-Method (labelled polytopes, as in nashpy's vertex_enumeration [4]):
-1. Shift both payoff matrices so all entries are positive (adding a constant
-   does not change best responses).
-2. P = {x >= 0 : B^T x <= 1} and Q = {y >= 0 : A y <= 1}.
-3. Label a point of P with i when x_i = 0, and with m + j when column j is a
-   best response (its constraint is tight). Label Q symmetrically.
-4. A pair of vertices (x, y), not both zero, is an equilibrium exactly when
-   every label 0 .. m+n-1 appears on x or on y ("completely labelled"):
-   each action is either unused or a best response.
-5. Normalising x and y to sum to 1 gives the mixed strategies.
+Completely labelled pairs of nonzero vertices yield equilibria after
+normalization. In degenerate games this lists extreme equilibria,
+not every member of a possible continuum.
 
-Everything is exact (Fractions), so the vertices and labels are exact too.
+Designed for the project's small games; enumeration is combinatorial.
 """
 
 from __future__ import annotations
 
 from fractions import Fraction
 from itertools import combinations
+from typing import TYPE_CHECKING
 
-from resource_war.encounter.matrix import BimatrixGame
 from resource_war.equilibrium.linalg import solve_exact
 from resource_war.equilibrium.support_enum import Equilibrium
 
+if TYPE_CHECKING:
+    from resource_war.encounter.matrix import BimatrixGame
 
-def _vertices(constraints: list[tuple[list[Fraction], Fraction]], dim: int) -> dict[tuple[Fraction, ...], frozenset[int]]:
-    """All vertices of {z : g . z <= h for every (g, h)}, with their tight-constraint labels."""
+
+def _vertices(
+    constraints: list[tuple[list[Fraction], Fraction]],
+    dim: int,
+) -> dict[tuple[Fraction, ...], frozenset[int]]:
+    """Enumerate feasible vertices and all their tight-constraint labels."""
     found: dict[tuple[Fraction, ...], frozenset[int]] = {}
+
     for tight in combinations(range(len(constraints)), dim):
-        sol = solve_exact([constraints[t][0] for t in tight], [constraints[t][1] for t in tight])
-        if sol.status != "unique":
+        solution = solve_exact(
+            [constraints[index][0] for index in tight],
+            [constraints[index][1] for index in tight],
+        )
+        if solution.status != "unique":
             continue
-        z = sol.x
-        values = [sum((g[k] * z[k] for k in range(dim)), Fraction(0)) for g, _ in constraints]
-        if any(val > h for val, (_, h) in zip(values, constraints)):
+
+        assert solution.x is not None
+        point = solution.x
+
+        values = [
+            sum(
+                (coefficients[k] * point[k] for k in range(dim)),
+                Fraction(0),
+            )
+            for coefficients, _ in constraints
+        ]
+
+        if any(
+            value > bound
+            for value, (_, bound) in zip(values, constraints)
+        ):
             continue
-        labels = frozenset(i for i, (val, (_, h)) in enumerate(zip(values, constraints)) if val == h)
-        found[z] = labels
+
+        labels = frozenset(
+            index
+            for index, (value, (_, bound)) in enumerate(
+                zip(values, constraints)
+            )
+            if value == bound
+        )
+        found[point] = labels
+
     return found
 
 
 def _polytopes(game: BimatrixGame):
-    """Vertices (with labels) of the two best-response polytopes P and Q."""
+    """Construct the vertices of both best-response polytopes."""
     m, n = game.shape
     a, b = game.row_payoffs, game.col_payoffs
-    shift = 1 - min(min(min(r) for r in a), min(min(r) for r in b))
-    a_pos = [[v + shift for v in r] for r in a]
-    b_pos = [[v + shift for v in r] for r in b]
+
+    smallest = min(
+        min(min(row) for row in a),
+        min(min(row) for row in b),
+    )
+    shift = Fraction(1) - smallest
+
+    a_positive = [[value + shift for value in row] for row in a]
+    b_positive = [[value + shift for value in row] for row in b]
+
     one, zero = Fraction(1), Fraction(0)
-    # P (row player's x): labels 0..m-1 for x_i >= 0, m..m+n-1 for columns' best-response constraints
-    p_cons = [([-one if k == i else zero for k in range(m)], zero) for i in range(m)]
-    p_cons += [([b_pos[i][j] for i in range(m)], one) for j in range(n)]
-    # Q (column player's y): labels 0..m-1 for rows' best-response constraints, m..m+n-1 for y_j >= 0
-    q_cons = [([a_pos[i][j] for j in range(n)], one) for i in range(m)]
-    q_cons += [([-one if k == j else zero for k in range(n)], zero) for j in range(n)]
-    return _vertices(p_cons, m), _vertices(q_cons, n)
+
+    # P labels 0..m-1: row probabilities are zero.
+    p_constraints = [
+        ([-one if k == i else zero for k in range(m)], zero)
+        for i in range(m)
+    ]
+
+    # P labels m..m+n-1: column payoff constraints are tight.
+    p_constraints += [
+        ([b_positive[i][j] for i in range(m)], one)
+        for j in range(n)
+    ]
+
+    # Q labels 0..m-1: row payoff constraints are tight.
+    q_constraints = [
+        ([a_positive[i][j] for j in range(n)], one)
+        for i in range(m)
+    ]
+
+    # Q labels m..m+n-1: column probabilities are zero.
+    q_constraints += [
+        ([-one if k == j else zero for k in range(n)], zero)
+        for j in range(n)
+    ]
+
+    return (
+        _vertices(p_constraints, m),
+        _vertices(q_constraints, n),
+    )
 
 
 def is_degenerate(game: BimatrixGame) -> bool:
-    """Exact degeneracy test: some vertex of P or Q has more labels than its dimension.
-
-    A label on a point of P means "this row is unused" or "this column is a
-    best response". More than m labels at a point x means x (a mix over k
-    rows) has more than k pure best responses: the textbook definition of a
-    degenerate game. Any point with too many labels lies on a face whose
-    vertices carry those labels too, so checking vertices is enough.
-    TODO: citation needed (labelled-polytope characterisation of degeneracy).
-    """
+    """Check whether a polytope vertex has more labels than its dimension."""
     m, n = game.shape
     p_vertices, q_vertices = _polytopes(game)
-    return any(len(lab) > m for lab in p_vertices.values()) or any(len(lab) > n for lab in q_vertices.values())
+
+    return (
+        any(len(labels) > m for labels in p_vertices.values())
+        or any(len(labels) > n for labels in q_vertices.values())
+    )
 
 
 def vertex_enumeration(game: BimatrixGame) -> list[Equilibrium]:
+    """Return normalized, completely labelled nonzero vertex pairs."""
     m, n = game.shape
     a, b = game.row_payoffs, game.col_payoffs
     p_vertices, q_vertices = _polytopes(game)
     all_labels = frozenset(range(m + n))
-    out = []
-    for x, lx in p_vertices.items():
-        if all(v == 0 for v in x):
+
+    found = {}
+
+    for x, x_labels in p_vertices.items():
+        if all(value == 0 for value in x):
             continue
-        for y, ly in q_vertices.items():
-            if all(v == 0 for v in y) or (lx | ly) != all_labels:
+
+        for y, y_labels in q_vertices.items():
+            if all(value == 0 for value in y):
                 continue
-            sx, sy = sum(x), sum(y)
-            xs = tuple(v / sx for v in x)
-            ys = tuple(v / sy for v in y)
-            u = sum((xs[i] * a[i][j] * ys[j] for i in range(m) for j in range(n)), Fraction(0))
-            w = sum((xs[i] * b[i][j] * ys[j] for i in range(m) for j in range(n)), Fraction(0))
-            out.append(Equilibrium(xs, ys, u, w))
-    out.sort(key=lambda e: (e.row, e.col))
-    return out
+            if (x_labels | y_labels) != all_labels:
+                continue
+
+            x_total, y_total = sum(x), sum(y)
+            row_mix = tuple(value / x_total for value in x)
+            col_mix = tuple(value / y_total for value in y)
+
+            row_payoff = sum(
+                (
+                    row_mix[i] * a[i][j] * col_mix[j]
+                    for i in range(m)
+                    for j in range(n)
+                ),
+                Fraction(0),
+            )
+            col_payoff = sum(
+                (
+                    row_mix[i] * b[i][j] * col_mix[j]
+                    for i in range(m)
+                    for j in range(n)
+                ),
+                Fraction(0),
+            )
+
+            found[(row_mix, col_mix)] = Equilibrium(
+                row_mix, col_mix, row_payoff, col_payoff
+            )
+
+    return sorted(found.values(), key=lambda eq: (eq.row, eq.col))
