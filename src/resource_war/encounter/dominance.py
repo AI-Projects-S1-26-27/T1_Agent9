@@ -148,3 +148,5 @@ def dominated_by_mixed(game: BimatrixGame, player: int, tol: float = 1e-9) -> li
         if res.status == 0 and -res.fun > tol:
             out.append(t)
     return out
+
+# Verified: Atharv (dominance)

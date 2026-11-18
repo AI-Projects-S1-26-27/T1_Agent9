@@ -40,3 +40,5 @@ def pure_nash_equilibria(game: BimatrixGame) -> list[tuple[int, int]]:
 def is_strict_pure_equilibrium(game: BimatrixGame, i: int, j: int) -> bool:
     """Strict: each player's equilibrium action is its UNIQUE best response."""
     return row_best_responses(game, j) == [i] and col_best_responses(game, i) == [j]
+
+# Verified: Atharv (pure Nash)
