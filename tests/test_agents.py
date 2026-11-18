@@ -11,7 +11,7 @@ from fractions import Fraction as F
 import numpy as np
 import pytest
 
-from resource_war.agents.base import Agent, EncounterState
+from resource_war.agents.base import Agent, EncounterState, sample_action
 from resource_war.agents.library import AGENT_TYPES, ExpectedUtilityAgent, make_agent
 from resource_war.config import ConfigError
 from resource_war.encounter.matrix import ATTACK, DEFEND, EXPAND, build_encounter_game
@@ -106,3 +106,31 @@ def test_every_pair_of_agent_types_completes_a_game(configs) -> None:
         for b in AGENT_TYPES:
             result = Game(configs, (make_agent(a, configs.agents, 1), make_agent(b, configs.agents, 1)), 5).run()
             assert result.turns == configs.game.turn_limit
+
+
+@pytest.mark.parametrize(
+    ("probabilities", "message"),
+    [
+        ((), "must not be empty"),
+        ((F(0), F(0), F(0)), "sum to 1"),
+        ((F(-1, 4), F(1, 2), F(3, 4)), "non-negative"),
+        ((F(1, 2), F(1, 4), F(1, 8)), "sum to 1"),
+        ((F(1, 2), F(1, 2), F(1, 2)), "sum to 1"),
+    ],
+)
+def test_sample_action_rejects_malformed_distributions(probabilities, message) -> None:
+    with pytest.raises(ValueError, match=message):
+        sample_action(probabilities, np.random.default_rng(0))
+
+
+def test_sample_action_validation_does_not_change_the_random_stream() -> None:
+    """Valid input must draw exactly one uniform, so replays stay byte-identical."""
+    a, b = np.random.default_rng(5), np.random.default_rng(5)
+    sample_action((F(2, 5), F(7, 20), F(1, 4)), a)
+    b.random()
+    assert a.random() == b.random()
+
+
+def test_sample_action_never_returns_a_zero_probability_action() -> None:
+    rng = np.random.default_rng(1)
+    assert {sample_action((F(1, 2), F(0), F(1, 2)), rng) for _ in range(500)} <= {0, 2}

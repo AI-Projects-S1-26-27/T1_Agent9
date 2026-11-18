@@ -58,6 +58,21 @@ class Agent(Protocol):
         ...
 
 
+def _validate_probabilities(probabilities: Sequence[Fraction]) -> None:
+    """Fail loudly on a malformed distribution instead of silently mis-sampling.
+
+    Checked before the random draw, so valid input consumes the random stream
+    exactly as before and replays stay byte-identical.
+    """
+    if len(probabilities) == 0:
+        raise ValueError("probabilities must not be empty")
+    if any(p < 0 for p in probabilities):
+        raise ValueError(f"probabilities must be non-negative, got {list(map(str, probabilities))}")
+    total = sum(float(p) for p in probabilities)
+    if abs(total - 1.0) > 1e-9:
+        raise ValueError(f"probabilities must sum to 1, got {total}")
+
+
 def sample_action(probabilities: Sequence[Fraction], rng: np.random.Generator) -> int:
     """Draw an action index from exact probabilities using one uniform draw.
 
@@ -65,6 +80,7 @@ def sample_action(probabilities: Sequence[Fraction], rng: np.random.Generator) -
     keeps the random stream identical across numpy versions' ``choice``
     implementations and makes replays byte-identical.
     """
+    _validate_probabilities(probabilities)
     u = rng.random()
     cumulative = 0.0
     last_positive = max(i for i, p in enumerate(probabilities) if p > 0)
