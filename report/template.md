@@ -381,17 +381,17 @@ See `docs/DESIGN.md` §9 and `docs/DECISIONS.md` for the full log. The main chan
 `docs/ROLES.md`; decisions per component are in `docs/DECISIONS.md`. State honestly what you
 personally did, reviewed and can explain.)*
 
-| Member | Component owned | Personal contribution (to be written by the member) |
+| Member | Component owned | Personal contribution (from the final report, Table 7) |
 |---|---|---|
-| Rohit Gangil | Integration, repo, CI, live demo UI | TODO |
-| Vaibhav Malik | Game engine | TODO |
-| Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | TODO |
+| Rohit Gangil | Integration, repo, CI, live demo UI | Integration, debugging, repository management and live demo interface; report editing and integration of experiment outputs. |
+| Vaibhav Malik | Game engine | Game engine: board, turn loop, rules and their integration; Battle Mode game tree and minimax. |
+| Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | Payoff matrix builder; pure Nash, dominance and Pareto analysis; tournament statistics and result-plot analysis. |
 | Gursidak Singh Bassi | Mixed Nash, nashpy validation, verifier | I worked on the equilibrium package, adapting the supplied code for exact support and vertex enumeration and integrating it with the best-response verifier. I updated the degeneracy check and implemented the selection rule used to choose between multiple equilibria. I also improved the Nashpy cross-check so that it checks strategy lengths and matches results one-to-one, while reporting vertex and support enumeration agreement separately. |
-| Harshit Agrawal | Battle Mode, evaluation, minimax | TODO |
+| Harshit Agrawal | Battle Mode, evaluation, minimax | Battle Mode game tree and minimax; alpha-beta pruning and verification of its consistency with minimax. |
 | Raunak Sarawgi | Alpha-beta, instrumentation, E3 | TODO |
-| Tushya Jain | Agent library | TODO |
+| Tushya Jain | Agent library | Agent library: pure, mixed, expected-utility and depth-limited agents; evaluation function; search-node and time instrumentation and benchmark reporting. |
 | Manas Tripathi | Tournaments, statistics, plots | TODO |
-| Jainam Parekh Naresh | Test suite, robustness, validation | TODO |
+| Jainam Parekh Naresh | Test suite, robustness, validation | Agent library: pure, mixed, expected-utility and depth-limited agents; evaluation function. Tournament runner, statistics, plots, report editing and unit tests. |
 
 ## 9. AI usage
 
