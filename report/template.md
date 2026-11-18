@@ -389,7 +389,7 @@ personally did, reviewed and can explain.)*
 | Gursidak Singh Bassi | Mixed Nash, nashpy validation, verifier | I worked on the equilibrium package, adapting the supplied code for exact support and vertex enumeration and integrating it with the best-response verifier. I updated the degeneracy check and implemented the selection rule used to choose between multiple equilibria. I also improved the Nashpy cross-check so that it checks strategy lengths and matches results one-to-one, while reporting vertex and support enumeration agreement separately. |
 | Harshit Agrawal | Battle Mode, evaluation, minimax | Battle Mode game tree and minimax; alpha-beta pruning and verification of its consistency with minimax. |
 | Raunak Sarawgi | Alpha-beta, instrumentation, E3 | TODO |
-| Tushya Jain | Agent library | Agent library: pure, mixed, expected-utility and depth-limited agents; evaluation function; search-node and time instrumentation and benchmark reporting. |
+| Tushya Jain | Agent library | Agent library: pure, mixed, expected-utility and depth-limited agents; evaluation function; search-node and time instrumentation and benchmark reporting. Some of this work was committed from teammates' accounts, so GitHub lists them as the authors: `85f0998` (agent interface, `agents/base.py`), `128e3e1` (`battle/instrument.py` and `alphabeta.py`) and `fda2d75` (`agents/library.py`, `battle/evaluation.py`, `battle/benchmark.py`, `tests/test_agents.py`). |
 | Manas Tripathi | Tournaments, statistics, plots | TODO |
 | Jainam Parekh Naresh | Test suite, robustness, validation | Agent library: pure, mixed, expected-utility and depth-limited agents; evaluation function. Tournament runner, statistics, plots, report editing and unit tests. |
 
