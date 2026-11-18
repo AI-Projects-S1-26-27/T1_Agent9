@@ -186,3 +186,5 @@ def realized_gains_and_costs(
     else:  # DEFEND vs EXPAND: the builder takes the cell
         gains = (v, zero) if row_action == EXPAND else (zero, v)
     return gains, costs
+
+# Verified: Atharv (bimatrix and encounter matrix)
