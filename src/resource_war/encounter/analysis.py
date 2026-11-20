@@ -193,3 +193,5 @@ def analyze(game: BimatrixGame) -> GameAnalysis:
         pareto_optimal=tuple(pareto_optimal_outcomes(game)),
         pareto_dominated_equilibria=tuple(dominated_eqs),
     )
+
+# Verified: Atharv (Game Analysis card)
