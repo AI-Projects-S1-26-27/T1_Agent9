@@ -386,7 +386,7 @@ personally did, reviewed and can explain.)*
 | Rohit Gangil | Integration, repo, CI, live demo UI | TODO |
 | Vaibhav Malik | Game engine | TODO |
 | Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | Specified locked 3x3 A/D/E encounter payoff parameters (`config/payoffs.yaml`), verified exact `Fraction` bimatrix construction and runtime payoff invariants (`matrix.py`), and implemented strict/iterated-weak/LP dominance (`dominance.py`), pure Nash enumeration (`pure_nash.py`), Pareto efficiency (`pareto.py`), and the Game Analysis card (`analysis.py`). |
-| Gursidak Singh Bassi | Mixed Nash, nashpy validation, verifier | TODO |
+| Gursidak Singh Bassi | Mixed Nash, nashpy validation, verifier | I worked on the equilibrium package, adapting the supplied code for exact support and vertex enumeration and integrating it with the best-response verifier. I updated the degeneracy check and implemented the selection rule used to choose between multiple equilibria. I also improved the Nashpy cross-check so that it checks strategy lengths and matches results one-to-one, while reporting vertex and support enumeration agreement separately. |
 | Harshit Agrawal | Battle Mode, evaluation, minimax | TODO |
 | Raunak Sarawgi | Alpha-beta, instrumentation, E3 | TODO |
 | Tushya Jain | Agent library | TODO |
