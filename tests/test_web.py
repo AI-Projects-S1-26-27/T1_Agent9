@@ -142,6 +142,9 @@ def test_server_serves_page_and_api(server) -> None:
     for path, ctype in (("/", "text/html"), ("/style.css", "text/css"), ("/app.js", "javascript")):
         status, content_type, body = _get(server + path)
         assert status == 200 and ctype in content_type and body
+    req = urllib.request.Request(server + "/api/meta", method="HEAD")
+    with urllib.request.urlopen(req, timeout=60) as r:
+        assert r.status == 200 and r.read() == b""
     status, _, body = _get(server + "/api/meta")
     assert status == 200 and len(json.loads(body)["agents"]) == 5
     status, data = _post(server + "/api/watch", {"agents": ["pure_heuristic", "fixed_mixed"], "depths": [1, 1], "seed": 2})
@@ -168,3 +171,11 @@ def test_server_blocks_path_traversal(server) -> None:
         with pytest.raises(urllib.error.HTTPError) as err:
             _get(server + path)
         assert err.value.code == 404
+
+
+def test_make_server_accepts_a_host() -> None:
+    srv = make_server(port=0, host="127.0.0.1")
+    try:
+        assert srv.server_address[0] == "127.0.0.1"
+    finally:
+        srv.server_close()

@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import threading
 import traceback
 import webbrowser
@@ -78,15 +79,34 @@ def make_handler(configs: Configs):
                 super().log_message(fmt, *args)
 
         def _send(self, status: int, payload: bytes, content_type: str) -> None:
-            self.send_response(status)
+            self.send_response(int(status))
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(payload)))
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
-            self.wfile.write(payload)
+            if self.command != "HEAD":
+                self.wfile.write(payload)
 
         def _json(self, status: int, data: Any) -> None:
             self._send(status, json.dumps(data).encode("utf-8"), "application/json; charset=utf-8")
+
+        def do_HEAD(self) -> None:  # noqa: N802
+            path = self.path.split("?", 1)[0]
+            if path == "/api/meta":
+                payload = json.dumps(meta(configs)).encode("utf-8")
+                self._send(200, payload, "application/json; charset=utf-8")
+                return
+            if path == "/" or path == "/index.html":
+                target = STATIC / "index.html"
+            else:
+                target = (STATIC / path.lstrip("/")).resolve()
+            if STATIC not in target.parents or not target.is_file():
+                self._send(404, b"", "text/plain; charset=utf-8")
+                return
+            ctype = mimetypes.guess_type(target.name)[0] or "application/octet-stream"
+            if ctype.startswith("text/") or ctype in ("application/javascript", "image/svg+xml"):
+                ctype += "; charset=utf-8"
+            self._send(200, b"", ctype)
 
         def do_GET(self) -> None:  # noqa: N802
             path = self.path.split("?", 1)[0]
@@ -127,9 +147,10 @@ def make_handler(configs: Configs):
     return Handler
 
 
-def make_server(port: int = 8765, configs: Configs | None = None) -> ThreadingHTTPServer:
+def make_server(port: int = 8765, configs: Configs | None = None, host: str = "127.0.0.1") -> ThreadingHTTPServer:
+    """Bind to ``host`` (loopback by default; use 0.0.0.0 only inside a container or on a host you control)."""
     configs = configs or load_all()
-    server = ThreadingHTTPServer(("127.0.0.1", port), make_handler(configs))
+    server = ThreadingHTTPServer((host, port), make_handler(configs))
     server.daemon_threads = True
     return server
 
@@ -145,13 +166,14 @@ def _warm_up(configs: Configs) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Agent9 Resource War: game-style web demo")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8765")))
+    parser.add_argument("--host", default="127.0.0.1", help="use 0.0.0.0 when deploying in a container")
     parser.add_argument("--no-browser", action="store_true")
     args = parser.parse_args(argv)
     configs = load_all()
-    server = make_server(args.port, configs)
+    server = make_server(args.port, configs, args.host)
     threading.Thread(target=_warm_up, args=(configs,), daemon=True).start()
-    url = f"http://127.0.0.1:{args.port}/"
+    url = f"http://{args.host}:{args.port}/"
     print(f"Resource War demo running at {url}  (Ctrl+C to stop)")
     if not args.no_browser:
         webbrowser.open(url)

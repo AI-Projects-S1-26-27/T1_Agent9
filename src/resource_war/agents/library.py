@@ -123,6 +123,8 @@ class ExpectedUtilityAgent(_Base):
         return values.index(max(values))  # first maximum = lexicographic tie-break (A, D, E)
 
     def observe(self, state: EncounterState, my_action: int, opp_action: int, payoff: Fraction) -> None:
+        if opp_action not in (0, 1, 2):
+            raise ValueError(f"opp_action must be 0, 1 or 2, got {opp_action!r}")
         key = self._key(state)
         if key not in self.counts:
             self.counts[key] = list(self.prior)
