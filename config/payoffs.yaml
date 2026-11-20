@@ -30,3 +30,5 @@ battle_win_prob:
   col: 0.5
 
 resource_values: [2, 4, 6, 8]   # possible cell values V
+
+# Verified: Atharv (encounter payoffs)

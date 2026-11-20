@@ -383,6 +383,7 @@ personally did, reviewed and can explain.)*
 
 | Member | Component owned | Personal contribution (from the final report, Table 7) |
 |---|---|---|
+
 | Rohit Gangil | Integration, repo, CI, live demo UI | Integration, debugging, repository management and live demo interface; report editing and integration of experiment outputs. |
 | Vaibhav Malik | Game engine | Game engine: board, turn loop, rules and their integration; Battle Mode game tree and minimax. |
 | Atharv Singhal | Encounter analysis (matrix, dominance, pure Nash, Pareto) | Payoff matrix builder; pure Nash, dominance and Pareto analysis; tournament statistics and result-plot analysis. |

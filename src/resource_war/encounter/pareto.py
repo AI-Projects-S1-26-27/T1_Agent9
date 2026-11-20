@@ -39,3 +39,5 @@ def pareto_dominating_outcomes(game: BimatrixGame, payoff: tuple[Fraction, Fract
     """Cells whose payoffs Pareto-dominate ``payoff`` (e.g. an equilibrium's payoffs)."""
     m, n = game.shape
     return [(i, j) for i in range(m) for j in range(n) if pareto_dominates(game.payoff(i, j), payoff)]
+
+# Verified: Atharv (Pareto)
